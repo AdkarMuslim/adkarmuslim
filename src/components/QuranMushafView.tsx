@@ -1,11 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { quranMushafFont } from "../lib/quran-font";
 
 type Props = {
   arabic: string[];
   english?: string[];
+  /** يمرَّر من صفحة سيرفر — لا تستورد `next/font` هنا (يكسر RSC / clientModules) */
+  mushafFontClassName: string;
 };
 
 type TranslationMode = "off" | "english";
@@ -14,7 +15,7 @@ function toArabicIndic(n: number): string {
   return String(n).replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[Number(d)]);
 }
 
-export default function QuranMushafView({ arabic, english = [] }: Props) {
+export default function QuranMushafView({ arabic, english = [], mushafFontClassName }: Props) {
   const [mode, setMode] = useState<TranslationMode>("off");
 
   const translation = useMemo(() => {
@@ -50,7 +51,7 @@ export default function QuranMushafView({ arabic, english = [] }: Props) {
       </div>
 
       <div
-        className={`quran-mushaf rounded-2xl border border-white/10 bg-black/20 px-4 py-5 sm:px-6 sm:py-6 ${quranMushafFont.className}`}
+        className={`quran-mushaf rounded-2xl border border-white/10 bg-black/20 px-4 py-5 sm:px-6 sm:py-6 ${mushafFontClassName}`}
         dir="rtl"
       >
         {arabic.map((line, idx) => {

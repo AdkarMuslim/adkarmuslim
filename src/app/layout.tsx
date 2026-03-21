@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Tajawal } from "next/font/google";
+
 import "./globals.css";
-import Navbar from "../components/Navbar";
-import MobileTabBar from "../components/MobileTabBar";
 import JsonLd from "../components/JsonLd";
+import MobileTabBar from "../components/MobileTabBar";
+import Navbar from "../components/Navbar";
 import { SITE_NAME, SITE_URL } from "../lib/seo";
 
 const tajawal = Tajawal({
@@ -11,8 +12,30 @@ const tajawal = Tajawal({
   weight: ["400", "500", "700"],
 });
 
+/** Production: set NEXT_PUBLIC_SITE_URL=https://adkarmuslim.com in Vercel env for correct canonical/OG on custom domain. */
+function siteMetadataBase(): URL {
+  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (fromEnv) {
+    try {
+      return new URL(fromEnv);
+    } catch {
+      // fall through
+    }
+  }
+  if (process.env.VERCEL_URL) {
+    return new URL(`https://${process.env.VERCEL_URL}`);
+  }
+  return new URL("https://adkarmuslim.com");
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0a0a1a",
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://adkarmuslim.com"),
+  metadataBase: siteMetadataBase(),
   title: {
     default: "أذكار المسلم - AdkarMuslim.com",
     template: "%s | أذكار المسلم",
@@ -37,13 +60,15 @@ export const metadata: Metadata = {
     siteName: "أذكار المسلم",
     title: "أذكار المسلم - AdkarMuslim.com",
     description: "مرافق إسلامي شامل: أذكار، قرآن، أدعية، حديث، وأوقات الصلاة.",
-    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "أذكار المسلم" }],
+    images: [
+      { url: "/logo.png", width: 800, height: 512, alt: "AdkarMuslim" },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "أذكار المسلم - AdkarMuslim.com",
     description: "أذكار، قرآن، أدعية، حديث، ومواقيت الصلاة.",
-    images: ["/twitter-image"],
+    images: ["/logo.png"],
   },
   robots: {
     index: true,
@@ -87,18 +112,11 @@ export default function RootLayout({
   };
 
   return (
-    <html
-      lang="ar"
-      dir="rtl"
-      className="dark"
-      suppressHydrationWarning
-    >
+    <html lang="ar" dir="rtl" className="dark" suppressHydrationWarning>
       <body className={`${tajawal.className} antialiased min-h-screen w-full min-w-0`}>
         <JsonLd data={globalJsonLd} />
         <Navbar />
-        <div className="relative min-h-screen w-full min-w-0 pb-24 pt-24">
-          {children}
-        </div>
+        <div className="relative min-h-screen w-full min-w-0 pb-24 pt-24">{children}</div>
         <MobileTabBar />
       </body>
     </html>

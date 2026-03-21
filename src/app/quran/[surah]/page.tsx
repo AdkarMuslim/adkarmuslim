@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import QuranMushafView from "../../../components/QuranMushafView";
 import SurahRecitationPicker from "../../../components/SurahRecitationPicker";
+import { quranMushafFont } from "../../../lib/quran-font";
 import { getConfiguredQuranApiReciterId, getQuranApiChapter } from "../../../lib/quranapi";
 
 const amiri = Amiri({ subsets: ["arabic"], weight: ["400", "700"] });
@@ -76,7 +77,11 @@ export default async function QuranSurahPage({
           تفسير هذه السورة (صوت)
         </Link>
 
-        <QuranMushafView arabic={chapter.arabic1} english={chapter.english} />
+        <QuranMushafView
+          arabic={chapter.arabic1}
+          english={chapter.english}
+          mushafFontClassName={quranMushafFont.className}
+        />
       </section>
     </main>
   );

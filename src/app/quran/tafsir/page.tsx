@@ -20,11 +20,13 @@ export const metadata: Metadata = {
 export default async function TafsirPage({
   searchParams,
 }: {
-  searchParams: Promise<{ surah?: string }>;
+  /** Next.js 14: كائن عادي — ليس Promise (هاد الشكل كان يخربط بعض أدوات البناء) */
+  searchParams: { surah?: string | string[] };
 }) {
   const [tafsir, surahs] = await Promise.all([getAllTafsirData(), getQuranApiSurahList()]);
-  const params = await searchParams;
-  const defaultSurah = Math.min(114, Math.max(1, Number(params?.surah) || 1));
+  const raw = searchParams?.surah;
+  const surahParam = Array.isArray(raw) ? raw[0] : raw;
+  const defaultSurah = Math.min(114, Math.max(1, Number(surahParam) || 1));
   const breadcrumbJsonLd = buildBreadcrumbJsonLd([
     { name: "الرئيسية", path: "/" },
     { name: "القرآن الكريم", path: "/quran" },
