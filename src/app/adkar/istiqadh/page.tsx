@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import ContentPageFooter from "../../../components/ContentPageFooter";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, RotateCcw, Share2 } from "lucide-react";
@@ -259,22 +259,15 @@ export default function AdkarIstiqadhPage() {
           })}
         </div>
 
-        <footer className="mt-8 border-t border-white/10 pt-5 text-sm leading-relaxed text-white/55">
-          <p>
-            بعدها:{" "}
-            <Link href="/adkar/sabah" className="text-accent underline-offset-2 hover:underline">
-              أذكار الصباح
-            </Link>
-            . وللمساء:{" "}
-            <Link href="/adkar/massa" className="text-accent underline-offset-2 hover:underline">
-              أذكار المساء
-            </Link>
-            .{" "}
-            <Link href="/adkar" className="text-accent underline-offset-2 hover:underline">
-              فهرس الأذكار
-            </Link>
-          </p>
-        </footer>
+        <ContentPageFooter
+          primaryLink={{ href: "/adkar", label: "فهرس الأذكار" }}
+          related={[
+            { href: "/adkar/sabah", label: "أذكار الصباح" },
+            { href: "/adkar/massa", label: "أذكار المساء" },
+            { href: "/adkar/salat", label: "أذكار بعد الصلاة" },
+          ]}
+          peerHub={{ href: "/duaa", label: "الأدعية" }}
+        />
       </section>
     </main>
   );

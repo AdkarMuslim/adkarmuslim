@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
+import ContentPageFooter from "../../components/ContentPageFooter";
 import type { Metadata } from "next";
 import JsonLd from "../../components/JsonLd";
 import { INDEX_PAGES } from "../../lib/seo-route-presets";
@@ -35,6 +36,19 @@ export default function DuaaPage() {
                 مع عداد يسهّل الحفظ على AdkarMuslim.
               </p>
               <p className="mt-2 text-sm text-white/55">اختر البطاقة أدناه للبدء.</p>
+              <p className="mt-3 text-xs leading-relaxed text-white/50 sm:text-sm">
+                للقراءة:{" "}
+                <Link href="/duaa/afdal-awqat-duaa" className="text-accent underline-offset-2 hover:underline">
+                  أفضل أوقات الدعاء
+                </Link>
+                {" · "}
+                <Link
+                  href="/duaa/hal-duaa-yughayyir-alqadar"
+                  className="text-accent underline-offset-2 hover:underline"
+                >
+                  هل الدعاء يغيّر القدر؟
+                </Link>
+              </p>
             </div>
             <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/20 text-accent">
               <Sparkles className="h-5 w-5" />
@@ -60,6 +74,15 @@ export default function DuaaPage() {
               <div className="mt-3 text-sm text-white/60">أدعية الأنبياء من القرآن الكريم.</div>
             </Link>
           </div>
+
+          <ContentPageFooter
+            primaryLink={{ href: "/", label: "الرئيسية" }}
+            related={[
+              { href: "/duaa/jawami3", label: "جوامع الدعاء" },
+              { href: "/duaa/quranic", label: "الأدعية القرآنية" },
+              { href: "/adkar", label: "الأذكار" },
+            ]}
+          />
         </div>
       </section>
     </>

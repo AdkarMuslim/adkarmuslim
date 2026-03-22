@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getHadithCollectionMeta } from "../../lib/hadith";
+import ContentPageFooter from "../../components/ContentPageFooter";
 import JsonLd from "../../components/JsonLd";
 import { INDEX_PAGES } from "../../lib/seo-route-presets";
 import { buildTwoLevelSeoLayout } from "../../lib/section-seo";
@@ -47,6 +48,15 @@ export default function HadithCollectionsPage() {
             );
           })}
         </div>
+
+        <ContentPageFooter
+          primaryLink={{ href: "/", label: "الرئيسية" }}
+          related={[
+            { href: "/hadith/bukhari", label: "صحيح البخاري" },
+            { href: "/hadith/muslim", label: "صحيح مسلم" },
+            { href: "/quran", label: "القرآن الكريم" },
+          ]}
+        />
         </section>
       </main>
     </>

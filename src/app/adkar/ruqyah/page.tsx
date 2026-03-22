@@ -1,6 +1,6 @@
 "use client";
 
-import SeoContentFooter from "../../../components/SeoContentFooter";
+import ContentPageFooter from "../../../components/ContentPageFooter";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, RotateCcw, Share2 } from "lucide-react";
@@ -258,12 +258,14 @@ export default function RuqyahPage() {
           })}
         </div>
 
-        <SeoContentFooter
-          section="adkar"
+        <ContentPageFooter
+          primaryLink={{ href: "/adkar", label: "فهرس الأذكار" }}
           related={[
             { href: "/adkar/manzil", label: "حصن المنزل" },
             { href: "/quran", label: "القرآن الكريم" },
+            { href: "/adkar/salah", label: "أذكار الصلاة" },
           ]}
+          peerHub={{ href: "/duaa", label: "الأدعية" }}
         />
       </section>
     </main>

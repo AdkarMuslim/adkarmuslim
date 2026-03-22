@@ -1,5 +1,6 @@
 "use client";
 
+import ContentPageFooter from "../../components/ContentPageFooter";
 import { useEffect, useMemo, useState } from "react";
 
 type Timings = {
@@ -403,6 +404,15 @@ export default function PrayerTimesPage() {
             </div>
           ))}
         </div>
+
+        <ContentPageFooter
+          primaryLink={{ href: "/", label: "الرئيسية" }}
+          related={[
+            { href: "/quran", label: "القرآن الكريم" },
+            { href: "/adkar", label: "الأذكار" },
+            { href: "/hadith", label: "الحديث النبوي" },
+          ]}
+        />
       </section>
     </main>
   );

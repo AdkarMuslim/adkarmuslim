@@ -1,6 +1,6 @@
 "use client";
 
-import SeoContentFooter from "../../../components/SeoContentFooter";
+import ContentPageFooter from "../../../components/ContentPageFooter";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, RotateCcw, Share2 } from "lucide-react";
@@ -158,12 +158,14 @@ export default function Jawami3DuaaPage() {
           })}
         </div>
 
-        <SeoContentFooter
-          section="duaa"
+        <ContentPageFooter
+          primaryLink={{ href: "/duaa", label: "فهرس الأدعية" }}
           related={[
             { href: "/duaa/quranic", label: "الأدعية القرآنية" },
             { href: "/duaa/anbiya", label: "أدعية الأنبياء" },
+            { href: "/quran", label: "القرآن الكريم" },
           ]}
+          peerHub={{ href: "/adkar", label: "الأذكار" }}
         />
       </section>
     </main>

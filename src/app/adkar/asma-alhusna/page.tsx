@@ -1,6 +1,6 @@
 "use client";
 
-import SeoContentFooter from "../../../components/SeoContentFooter";
+import ContentPageFooter from "../../../components/ContentPageFooter";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, Copy, Share2 } from "lucide-react";
@@ -435,12 +435,14 @@ export default function AsmaAlhusnaPage() {
           ) : null}
         </AnimatePresence>
 
-        <SeoContentFooter
-          section="adkar"
+        <ContentPageFooter
+          primaryLink={{ href: "/adkar", label: "فهرس الأذكار" }}
           related={[
             { href: "/adkar/tasabih", label: "التسبيح" },
             { href: "/duaa/quranic", label: "الأدعية القرآنية" },
+            { href: "/adkar/sabah", label: "أذكار الصباح" },
           ]}
+          peerHub={{ href: "/duaa", label: "الأدعية" }}
         />
       </section>
     </main>

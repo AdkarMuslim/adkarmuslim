@@ -9,6 +9,8 @@ const STATIC_ROUTES = [
   "/duaa/jawami3",
   "/duaa/quranic",
   "/duaa/anbiya",
+  "/duaa/afdal-awqat-duaa",
+  "/duaa/hal-duaa-yughayyir-alqadar",
   "/quran",
   "/quran/tafsir",
   "/hadith",
@@ -41,6 +43,9 @@ const ADKAR_ROUTES = [
   "/adkar/asma-alhusna",
   "/adkar/manzil",
   "/adkar/tasabih",
+  "/adkar/fadl-adhkar-sabah",
+  "/adkar/fadl-adhkar-masaa",
+  "/adkar/kaif-tuqra-adhkar",
 ] as const;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

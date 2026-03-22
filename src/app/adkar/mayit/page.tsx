@@ -1,6 +1,6 @@
 "use client";
 
-import SeoContentFooter from "../../../components/SeoContentFooter";
+import ContentPageFooter from "../../../components/ContentPageFooter";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, RotateCcw, Share2 } from "lucide-react";
@@ -254,12 +254,14 @@ export default function AdkarMayitPage() {
           })}
         </div>
 
-        <SeoContentFooter
-          section="adkar"
+        <ContentPageFooter
+          primaryLink={{ href: "/adkar", label: "فهرس الأذكار" }}
           related={[
             { href: "/duaa/jawami3", label: "جوامع الدعاء" },
             { href: "/adkar/sabah", label: "أذكار الصباح" },
+            { href: "/quran", label: "القرآن الكريم" },
           ]}
+          peerHub={{ href: "/duaa", label: "الأدعية" }}
         />
       </section>
     </main>

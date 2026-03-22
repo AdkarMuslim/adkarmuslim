@@ -1,6 +1,7 @@
 import { Amiri } from "next/font/google";
 import Link from "next/link";
 import type { Metadata } from "next";
+import ContentPageFooter from "../../../components/ContentPageFooter";
 import JsonLd from "../../../components/JsonLd";
 import TafsirPageClient from "../../../components/TafsirPageClient";
 import { getAllTafsirData } from "../../../lib/tafsirapi";
@@ -56,6 +57,15 @@ export default async function TafsirPage({
           sourceName={tafsir.sourceName}
           segmentsBySurah={tafsir.segmentsBySurah}
           defaultSurahId={defaultSurah}
+        />
+
+        <ContentPageFooter
+          primaryLink={{ href: "/quran", label: "القرآن الكريم" }}
+          related={[
+            { href: "/prayer-times", label: "مواقيت الصلاة" },
+            { href: "/adkar", label: "الأذكار" },
+            { href: "/duaa", label: "الأدعية" },
+          ]}
         />
         </section>
       </main>

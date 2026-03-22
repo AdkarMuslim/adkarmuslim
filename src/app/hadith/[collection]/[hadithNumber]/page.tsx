@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import ContentPageFooter from "../../../../components/ContentPageFooter";
 import JsonLd from "../../../../components/JsonLd";
 import {
   getHadithCollection,
@@ -74,6 +75,8 @@ export default async function HadithDetailPage({
   if (!hadith) notFound();
 
   const meta = getHadithCollectionMeta(collection);
+  const otherCollection = collection === "bukhari" ? "muslim" : "bukhari";
+  const otherMeta = getHadithCollectionMeta(otherCollection);
   const path = `/hadith/${collection}/${hadith.hadith_number}`;
   const description = `نص الحديث رقم ${hadith.hadith_number} من ${meta.title} بصياغة مقروءة؛ تنقّل سريع للأحاديث المجاورة على أذكار المسلم.`;
   const headline = `حديث ${hadith.hadith_number} — ${meta.title}`;
@@ -120,6 +123,15 @@ export default async function HadithDetailPage({
           <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
             <p className="whitespace-pre-line text-lg leading-9 text-white/95">{hadith.text}</p>
           </div>
+
+          <ContentPageFooter
+            primaryLink={{ href: "/hadith", label: "كتب الحديث النبوي" }}
+            related={[
+              { href: `/hadith/${collection}`, label: `أحاديث ${meta.title}` },
+              { href: `/hadith/${otherCollection}`, label: otherMeta.title },
+              { href: "/quran", label: "القرآن الكريم" },
+            ]}
+          />
         </section>
       </main>
     </>

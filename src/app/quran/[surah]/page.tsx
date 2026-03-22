@@ -2,6 +2,7 @@ import { Amiri } from "next/font/google";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import ContentPageFooter from "../../../components/ContentPageFooter";
 import JsonLd from "../../../components/JsonLd";
 import QuranMushafView from "../../../components/QuranMushafView";
 import SurahRecitationPicker from "../../../components/SurahRecitationPicker";
@@ -123,6 +124,15 @@ export default async function QuranSurahPage({
             arabic={chapter.arabic1}
             english={chapter.english}
             mushafFontClassName={quranMushafFont.className}
+          />
+
+          <ContentPageFooter
+            primaryLink={{ href: "/quran", label: "فهرس السور" }}
+            related={[
+              { href: `/quran/tafsir?surah=${surahNumber}`, label: "تفسير هذه السورة" },
+              { href: "/adkar", label: "الأذكار" },
+              { href: "/duaa", label: "الأدعية" },
+            ]}
           />
         </section>
       </main>

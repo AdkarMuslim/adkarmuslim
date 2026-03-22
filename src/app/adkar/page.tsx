@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ComingSoonCard from "../../components/ComingSoonCard";
+import ContentPageFooter from "../../components/ContentPageFooter";
 import { CircleDot, Moon, Sparkles, Sun } from "lucide-react";
 import type { Metadata } from "next";
 import JsonLd from "../../components/JsonLd";
@@ -61,6 +62,20 @@ export default function AdkarIndexPage() {
                 أذكار بعد الصلاة
               </Link>
               .
+            </p>
+            <p className="mt-3 text-xs leading-relaxed text-white/50 sm:text-sm">
+              للقراءة:{" "}
+              <Link href="/adkar/fadl-adhkar-sabah" className="text-accent underline-offset-2 hover:underline">
+                فضل أذكار الصباح
+              </Link>
+              {" · "}
+              <Link href="/adkar/fadl-adhkar-masaa" className="text-accent underline-offset-2 hover:underline">
+                فضل أذكار المساء
+              </Link>
+              {" · "}
+              <Link href="/adkar/kaif-tuqra-adhkar" className="text-accent underline-offset-2 hover:underline">
+                كيف تقرأ الأذكار
+              </Link>
             </p>
           </div>
           <div className="hidden sm:block">
@@ -392,6 +407,15 @@ export default function AdkarIndexPage() {
             </div>
           </Link>
         </div>
+
+        <ContentPageFooter
+          primaryLink={{ href: "/", label: "الرئيسية" }}
+          related={[
+            { href: "/adkar/sabah", label: "أذكار الصباح" },
+            { href: "/adkar/massa", label: "أذكار المساء" },
+            { href: "/duaa", label: "الأدعية" },
+          ]}
+        />
         </div>
       </section>
     </>

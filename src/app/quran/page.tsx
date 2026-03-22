@@ -1,6 +1,7 @@
 import { Amiri } from "next/font/google";
 import Link from "next/link";
 import type { Metadata } from "next";
+import ContentPageFooter from "../../components/ContentPageFooter";
 import JsonLd from "../../components/JsonLd";
 import { quranMushafFont } from "../../lib/quran-font";
 import { getQuranApiSurahList } from "../../lib/quranapi";
@@ -75,6 +76,15 @@ export default async function QuranPage() {
             );
           })}
         </div>
+
+        <ContentPageFooter
+          primaryLink={{ href: "/", label: "الرئيسية" }}
+          related={[
+            { href: "/quran/tafsir", label: "تفسير القرآن" },
+            { href: "/adkar", label: "الأذكار" },
+            { href: "/hadith", label: "الحديث النبوي" },
+          ]}
+        />
         </section>
       </main>
     </>
