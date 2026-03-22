@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import JsonLd from "../../components/JsonLd";
 import LegalArticle from "../../components/LegalArticle";
-import { buildBreadcrumbJsonLd, buildWebPageJsonLd } from "../../lib/seo";
-import { SITE_NAME, SITE_URL } from "../../lib/seo";
+import { arSeoMeta } from "../../lib/ar-seo-meta";
+import { buildBreadcrumbJsonLd, buildWebPageJsonLd, SITE_NAME, SITE_URL } from "../../lib/seo";
 
 const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "contact@adkarmuslim.com";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = arSeoMeta({
   title: "اتصل بنا",
-  description: `طرق التواصل مع ${SITE_NAME}.`,
-  alternates: { canonical: "/contact" },
-};
+  description: `تواصل مع فريق ${SITE_NAME}: اقتراحات، ملاحظات، أو طلب معلومات — AdkarMuslim.com`,
+  path: "/contact",
+});
 
 export default function ContactPage() {
   const breadcrumb = buildBreadcrumbJsonLd([
@@ -20,7 +20,7 @@ export default function ContactPage() {
   const webPage = buildWebPageJsonLd({
     path: "/contact",
     name: "اتصل بنا",
-    description: `طرق التواصل مع ${SITE_NAME}.`,
+    description: `تواصل مع فريق ${SITE_NAME} — اقتراحات وملاحظات على AdkarMuslim.com`,
   });
 
   return (

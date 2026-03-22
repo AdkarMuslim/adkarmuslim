@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import JsonLd from "../../components/JsonLd";
 import LegalArticle from "../../components/LegalArticle";
-import { buildBreadcrumbJsonLd, buildWebPageJsonLd } from "../../lib/seo";
-import { SITE_NAME, SITE_URL } from "../../lib/seo";
+import { arSeoMeta } from "../../lib/ar-seo-meta";
+import { buildBreadcrumbJsonLd, buildWebPageJsonLd, SITE_NAME, SITE_URL } from "../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = arSeoMeta({
   title: "شروط الاستخدام",
-  description: `شروط استخدام موقع ${SITE_NAME}.`,
-  alternates: { canonical: "/terms" },
-};
+  description: `شروط استخدام ${SITE_NAME} وAdkarMuslim.com: المسؤولية، المحتوى، والاستخدام المقبول للخدمة.`,
+  path: "/terms",
+});
 
 export default function TermsPage() {
   const breadcrumb = buildBreadcrumbJsonLd([

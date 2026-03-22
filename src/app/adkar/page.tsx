@@ -3,15 +3,15 @@ import ComingSoonCard from "../../components/ComingSoonCard";
 import { CircleDot, Moon, Sparkles, Sun } from "lucide-react";
 import type { Metadata } from "next";
 import JsonLd from "../../components/JsonLd";
+import { arSeoMeta } from "../../lib/ar-seo-meta";
 import { buildBreadcrumbJsonLd, buildWebPageJsonLd } from "../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "الأذكار",
-  description: "تصفح أذكار الصباح والمساء وأذكار النوم والصلاة وغيرها مع تجربة عداد مريحة.",
-  alternates: {
-    canonical: "/adkar",
-  },
-};
+export const metadata: Metadata = arSeoMeta({
+  title: "الأذكار اليومية",
+  description:
+    "أذكار الصباح والمساء، النوم، الصلاة، المسجد، الوضوء، الرقية، أسماء الله الحسنى وأكثر — مع عداد وتجربة عربية سلسة.",
+  path: "/adkar",
+});
 
 export default function AdkarIndexPage() {
   const breadcrumbJsonLd = buildBreadcrumbJsonLd([
@@ -20,8 +20,9 @@ export default function AdkarIndexPage() {
   ]);
   const webPageJsonLd = buildWebPageJsonLd({
     path: "/adkar",
-    name: "الأذكار",
-    description: "تصفح أذكار الصباح والمساء وأذكار النوم والصلاة وغيرها مع تجربة عداد مريحة.",
+    name: "الأذكار اليومية",
+    description:
+      "أذكار الصباح والمساء، النوم، الصلاة، المسجد، الوضوء، الرقية، أسماء الله الحسنى وأكثر — مع عداد وتجربة عربية سلسة.",
   });
 
   return (

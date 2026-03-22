@@ -42,15 +42,21 @@ export const metadata: Metadata = {
     default: "أذكار المسلم - AdkarMuslim.com",
     template: "%s | أذكار المسلم",
   },
-  description: "مرافق إسلامي شامل: أذكار، قرآن، أدعية، حديث، وأوقات الصلاة بتجربة حديثة.",
+  description:
+    "AdkarMuslim.com — أذكار يومية (صباح، مساء، صلاة)، القرآن والتلاوة، تفسير صوتي، أدعية مأثورة، صحيح البخاري ومسلم، مواقيت الصلاة. عربي، مجاني، مناسب للجوال.",
   keywords: [
     "أذكار المسلم",
     "أذكار الصباح والمساء",
     "القرآن الكريم",
-    "تفسير القرآن",
+    "تفسير القرآن صوتي",
     "مواقيت الصلاة",
-    "الأدعية",
-    "الحديث",
+    "أوقات الصلاة",
+    "الأدعية المأثورة",
+    "صحيح البخاري",
+    "صحيح مسلم",
+    "الرقية الشرعية",
+    "أسماء الله الحسنى",
+    "AdkarMuslim",
   ],
   alternates: {
     canonical: "/",
@@ -61,7 +67,8 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "أذكار المسلم",
     title: "أذكار المسلم - AdkarMuslim.com",
-    description: "مرافق إسلامي شامل: أذكار، قرآن، تفسير، ومواقيت الصلاة.",
+    description:
+      "أذكار يومية مع عداد، قرآن وتلاوة، تفسير صوتي، أدعية، حديث نبوي، مواقيت صلاة — منصة عربية مجانية.",
     images: [
       { url: "/logo.png", width: 800, height: 512, alt: "AdkarMuslim" },
     ],
@@ -69,7 +76,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "أذكار المسلم - AdkarMuslim.com",
-    description: "أذكار، قرآن، أدعية، حديث، ومواقيت الصلاة.",
+    description:
+      "أذكار، قرآن، تفسير صوتي، أدعية، حديث، مواقيت صلاة — AdkarMuslim.com",
     images: ["/logo.png"],
   },
   robots: {
@@ -106,7 +114,7 @@ export default function RootLayout({
         publisher: { "@id": `${SITE_URL}#organization` },
         potentialAction: {
           "@type": "SearchAction",
-          target: `${SITE_URL}/?q={search_term_string}`,
+          target: `${SITE_URL}/search?q={search_term_string}`,
           "query-input": "required name=search_term_string",
         },
       },

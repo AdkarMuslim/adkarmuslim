@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import JsonLd from "../../components/JsonLd";
 import LegalArticle from "../../components/LegalArticle";
+import { arSeoMeta } from "../../lib/ar-seo-meta";
 import { buildBreadcrumbJsonLd, buildWebPageJsonLd, SITE_NAME, SITE_URL } from "../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = arSeoMeta({
   title: "من نحن",
-  description: `تعريف بموقع ${SITE_NAME} (AdkarMuslim.com) وأهدافه.`,
-  alternates: { canonical: "/about" },
-};
+  description: `${SITE_NAME} (AdkarMuslim.com): منصة عربية لتسهيل الأذكار والقرآن والدعاء والحديث ومواقيت الصلاة — أهدافنا ورسالتنا.`,
+  path: "/about",
+});
 
 export default function AboutPage() {
   const breadcrumb = buildBreadcrumbJsonLd([
@@ -17,7 +18,7 @@ export default function AboutPage() {
   const webPage = buildWebPageJsonLd({
     path: "/about",
     name: "من نحن",
-    description: `تعريف بموقع ${SITE_NAME}.`,
+    description: `${SITE_NAME} (AdkarMuslim.com): منصة عربية لتسهيل الأذكار والقرآن والدعاء والحديث ومواقيت الصلاة.`,
   });
 
   return (

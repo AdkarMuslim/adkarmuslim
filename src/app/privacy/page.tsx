@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import JsonLd from "../../components/JsonLd";
 import LegalArticle from "../../components/LegalArticle";
-import { buildBreadcrumbJsonLd, buildWebPageJsonLd } from "../../lib/seo";
-import { SITE_NAME, SITE_URL } from "../../lib/seo";
+import { arSeoMeta } from "../../lib/ar-seo-meta";
+import { buildBreadcrumbJsonLd, buildWebPageJsonLd, SITE_NAME, SITE_URL } from "../../lib/seo";
 
 const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "contact@adkarmuslim.com";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = arSeoMeta({
   title: "سياسة الخصوصية",
-  description: `كيف نتعامل مع البيانات في ${SITE_NAME}.`,
-  alternates: { canonical: "/privacy" },
-};
+  description: `سياسة الخصوصية لـ ${SITE_NAME} (AdkarMuslim.com): البيانات، الكوكيز، والاستخدامات — شفافية وبساطة.`,
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   const breadcrumb = buildBreadcrumbJsonLd([

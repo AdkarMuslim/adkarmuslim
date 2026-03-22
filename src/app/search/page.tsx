@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { arSeoMeta } from "../../lib/ar-seo-meta";
 import { searchSite } from "../../lib/search-index";
 
-export const metadata: Metadata = {
-  title: "بحث",
-  description: "البحث في أقسام أذكار المسلم.",
-  robots: { index: false, follow: true },
-};
+export const metadata: Metadata = arSeoMeta({
+  title: "بحث في الموقع",
+  description:
+    "ابحث عن أذكار، سور قرآن، أدعية، حديث، مواقيت، وأقسام أخرى داخل أذكار المسلم — نتائج فورية وروابط مباشرة.",
+  path: "/search",
+  index: false,
+});
 
 type Props = {
   searchParams: Record<string, string | string[] | undefined>;

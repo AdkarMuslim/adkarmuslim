@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import QuranMushafView from "../../../components/QuranMushafView";
 import SurahRecitationPicker from "../../../components/SurahRecitationPicker";
 import { quranMushafFont } from "../../../lib/quran-font";
+import { arSeoMeta } from "../../../lib/ar-seo-meta";
 import { getConfiguredQuranApiReciterId, getQuranApiChapter } from "../../../lib/quranapi";
 
 const amiri = Amiri({ subsets: ["arabic"], weight: ["400", "700"] });
@@ -19,16 +20,17 @@ export async function generateMetadata({
     return { title: "القرآن الكريم" };
   }
   const chapter = await getQuranApiChapter(surahNumber);
-  const title = chapter?.surahNameArabicLong
-    ? `سورة ${chapter.surahNameArabicLong}`
-    : `سورة ${surahNumber}`;
-  return {
+  const surahName = chapter?.surahNameArabicLong ?? "";
+  const title = surahName ? `سورة ${surahName}` : `سورة ${surahNumber}`;
+  const description = surahName
+    ? `اقرأ سورة ${surahName} كاملة بخط واضح، غيّر القارئ، واستمع للتلاوة. رابط مباشر لتفسير هذه السورة صوتياً على أذكار المسلم.`
+    : `السورة ${surahNumber} من القرآن الكريم — قراءة آيات، تلاوة، وتفسير صوتي.`;
+
+  return arSeoMeta({
     title,
-    description: "قراءة آيات السورة والاستماع لتلاوتها مع رابط مباشر إلى التفسير الصوتي.",
-    alternates: {
-      canonical: `/quran/${surahNumber}`,
-    },
-  };
+    description,
+    path: `/quran/${surahNumber}`,
+  });
 }
 
 export default async function QuranSurahPage({

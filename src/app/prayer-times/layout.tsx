@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import JsonLd from "../../components/JsonLd";
+import { arSeoMeta } from "../../lib/ar-seo-meta";
 import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildWebPageJsonLd } from "../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = arSeoMeta({
   title: "مواقيت الصلاة",
   description:
-    "مواقيت الصلاة حسب موقعك أو المدينة، مع اختيار طريقة الحساب الأنسب تلقائيا.",
-  alternates: {
-    canonical: "/prayer-times",
-  },
-};
+    "أوقات الفجر والظهر والعصر والمغرب والعشاء حسب مدينتك أو GPS، مع ضبط طريقة الحساب وتجربة سريعة على الجوال.",
+  path: "/prayer-times",
+});
 
 export default function PrayerTimesLayout({
   children,
@@ -23,7 +22,8 @@ export default function PrayerTimesLayout({
   const webPageJsonLd = buildWebPageJsonLd({
     path: "/prayer-times",
     name: "مواقيت الصلاة",
-    description: "مواقيت الصلاة حسب موقعك أو المدينة، مع اختيار طريقة الحساب الأنسب تلقائيا.",
+    description:
+      "أوقات الفجر والظهر والعصر والمغرب والعشاء حسب مدينتك أو GPS، مع ضبط طريقة الحساب وتجربة سريعة على الجوال.",
   });
   const faqJsonLd = buildFaqJsonLd([
     {

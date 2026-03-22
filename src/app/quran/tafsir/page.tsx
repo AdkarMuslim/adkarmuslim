@@ -5,17 +5,17 @@ import JsonLd from "../../../components/JsonLd";
 import TafsirPageClient from "../../../components/TafsirPageClient";
 import { getAllTafsirData } from "../../../lib/tafsirapi";
 import { getQuranApiSurahList } from "../../../lib/quranapi";
+import { arSeoMeta } from "../../../lib/ar-seo-meta";
 import { buildBreadcrumbJsonLd, buildWebPageJsonLd } from "../../../lib/seo";
 
 const amiri = Amiri({ subsets: ["arabic"], weight: ["400", "700"] });
 
-export const metadata: Metadata = {
-  title: "تفسير القرآن",
-  description: "تفسير صوتي لسور القرآن الكريم.",
-  alternates: {
-    canonical: "/quran/tafsir",
-  },
-};
+export const metadata: Metadata = arSeoMeta({
+  title: "تفسير القرآن الصوتي",
+  description:
+    "استمع لتفسير مقاطع من سور القرآن: اختر السورة والمقطع المتاح، بتجربة عربية بسيطة وواضحة.",
+  path: "/quran/tafsir",
+});
 
 export default async function TafsirPage({
   searchParams,
@@ -30,12 +30,13 @@ export default async function TafsirPage({
   const breadcrumbJsonLd = buildBreadcrumbJsonLd([
     { name: "الرئيسية", path: "/" },
     { name: "القرآن الكريم", path: "/quran" },
-    { name: "تفسير القرآن", path: "/quran/tafsir" },
+    { name: "تفسير القرآن الصوتي", path: "/quran/tafsir" },
   ]);
   const webPageJsonLd = buildWebPageJsonLd({
     path: "/quran/tafsir",
-    name: "تفسير القرآن",
-    description: "تفسير صوتي لسور القرآن الكريم مع اختيار السورة والمقاطع المتاحة.",
+    name: "تفسير القرآن الصوتي",
+    description:
+      "استمع لتفسير مقاطع من سور القرآن: اختر السورة والمقطع المتاح، بتجربة عربية بسيطة وواضحة.",
   });
 
   return (

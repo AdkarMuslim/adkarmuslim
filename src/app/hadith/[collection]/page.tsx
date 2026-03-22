@@ -6,6 +6,7 @@ import {
   getHadithCollectionMeta,
   isHadithCollectionId,
 } from "../../../lib/hadith";
+import { arSeoMeta } from "../../../lib/ar-seo-meta";
 
 const PAGE_SIZE = 30;
 
@@ -18,13 +19,11 @@ export async function generateMetadata({
     return { title: "الحديث" };
   }
   const meta = getHadithCollectionMeta(params.collection);
-  return {
+  return arSeoMeta({
     title: meta.title,
-    description: `تصفح أحاديث ${meta.title} مرتبة حسب رقم الحديث مع صفحات مفصلة.`,
-    alternates: {
-      canonical: `/hadith/${params.collection}`,
-    },
-  };
+    description: `تصفح أحاديث ${meta.title} برقم الحديث: نص واضح، ترقيم دقيق، وتنقّل سهل بين الصفحات على أذكار المسلم.`,
+    path: `/hadith/${params.collection}`,
+  });
 }
 
 export default async function HadithCollectionPage({

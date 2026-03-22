@@ -2,17 +2,17 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getHadithCollectionMeta } from "../../lib/hadith";
 import JsonLd from "../../components/JsonLd";
+import { arSeoMeta } from "../../lib/ar-seo-meta";
 import { buildBreadcrumbJsonLd, buildWebPageJsonLd } from "../../lib/seo";
 
 const COLLECTIONS = ["bukhari", "muslim"] as const;
 
-export const metadata: Metadata = {
-  title: "الحديث",
-  description: "تصفح كتب الحديث وقراءة الأحاديث مرتبة حسب المصدر ورقم الحديث.",
-  alternates: {
-    canonical: "/hadith",
-  },
-};
+export const metadata: Metadata = arSeoMeta({
+  title: "الحديث النبوي الشريف",
+  description:
+    "صحيح البخاري وصحيح مسلم: تصفح الأحاديث برقم الحديث، اقرأ النص بوضوح، وتنقّل بين الصحيحين بسهولة.",
+  path: "/hadith",
+});
 
 export default function HadithCollectionsPage() {
   const breadcrumbJsonLd = buildBreadcrumbJsonLd([
@@ -21,8 +21,9 @@ export default function HadithCollectionsPage() {
   ]);
   const webPageJsonLd = buildWebPageJsonLd({
     path: "/hadith",
-    name: "الحديث",
-    description: "تصفح كتب الحديث وقراءة الأحاديث مرتبة حسب المصدر ورقم الحديث.",
+    name: "الحديث النبوي الشريف",
+    description:
+      "صحيح البخاري وصحيح مسلم: تصفح الأحاديث برقم الحديث، اقرأ النص بوضوح، وتنقّل بين الصحيحين بسهولة.",
   });
 
   return (

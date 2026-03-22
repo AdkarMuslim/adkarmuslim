@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import ComingSoonCard from "../../components/ComingSoonCard";
+import { arSeoMeta } from "../../lib/ar-seo-meta";
+
+export const metadata: Metadata = arSeoMeta({
+  title: "المسبحة الإلكترونية",
+  description:
+    "قريباً: مسبحة رقمية أنيقة مع اهتزاز وتتبع — ضمن أذكار المسلم. الصفحة قيد الإعداد ولا تُفهرس بعد.",
+  path: "/tasbih",
+  index: false,
+});
 
 export default function TasbihPage() {
   return (

@@ -2,15 +2,15 @@ import Link from "next/link";
 import { Sparkles } from "lucide-react";
 import type { Metadata } from "next";
 import JsonLd from "../../components/JsonLd";
+import { arSeoMeta } from "../../lib/ar-seo-meta";
 import { buildBreadcrumbJsonLd, buildWebPageJsonLd } from "../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "الأدعية",
-  description: "أدعية مختارة: جوامع الدعاء، الأدعية القرآنية، وأدعية الأنبياء.",
-  alternates: {
-    canonical: "/duaa",
-  },
-};
+export const metadata: Metadata = arSeoMeta({
+  title: "الأدعية المأثورة",
+  description:
+    "دعاء مأثور من السنة، أدعية قرآنية، وأدعية الأنبياء — منظمة للقراءة والحفظ مع عداد وتجربة واضحة بالعربية.",
+  path: "/duaa",
+});
 
 export default function DuaaPage() {
   const breadcrumbJsonLd = buildBreadcrumbJsonLd([
@@ -19,8 +19,9 @@ export default function DuaaPage() {
   ]);
   const webPageJsonLd = buildWebPageJsonLd({
     path: "/duaa",
-    name: "الأدعية",
-    description: "أدعية مختارة: جوامع الدعاء، الأدعية القرآنية، وأدعية الأنبياء.",
+    name: "الأدعية المأثورة",
+    description:
+      "دعاء مأثور من السنة، أدعية قرآنية، وأدعية الأنبياء — منظمة للقراءة والحفظ مع عداد وتجربة واضحة بالعربية.",
   });
 
   return (

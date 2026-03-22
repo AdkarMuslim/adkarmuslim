@@ -6,6 +6,7 @@ import {
   getHadithCollectionMeta,
   isHadithCollectionId,
 } from "../../../../lib/hadith";
+import { arSeoMeta } from "../../../../lib/ar-seo-meta";
 
 export async function generateMetadata({
   params,
@@ -15,13 +16,12 @@ export async function generateMetadata({
   if (!isHadithCollectionId(params.collection)) return { title: "الحديث" };
   const hadithNo = Number.parseInt(params.hadithNumber, 10);
   const meta = getHadithCollectionMeta(params.collection);
-  return {
-    title: `حديث ${Number.isFinite(hadithNo) ? hadithNo : params.hadithNumber} - ${meta.title}`,
-    description: `قراءة نص حديث من ${meta.title} مع ترقيم واضح وسهولة الانتقال بين الأحاديث.`,
-    alternates: {
-      canonical: `/hadith/${params.collection}/${params.hadithNumber}`,
-    },
-  };
+  const label = Number.isFinite(hadithNo) ? hadithNo : params.hadithNumber;
+  return arSeoMeta({
+    title: `حديث ${label} — ${meta.title}`,
+    description: `نص الحديث رقم ${label} من ${meta.title} بصياغة مقروءة؛ تنقّل سريع للأحاديث المجاورة على أذكار المسلم.`,
+    path: `/hadith/${params.collection}/${params.hadithNumber}`,
+  });
 }
 
 export default async function HadithDetailPage({

@@ -4,17 +4,17 @@ import type { Metadata } from "next";
 import JsonLd from "../../components/JsonLd";
 import { quranMushafFont } from "../../lib/quran-font";
 import { getQuranApiSurahList } from "../../lib/quranapi";
+import { arSeoMeta } from "../../lib/ar-seo-meta";
 import { buildBreadcrumbJsonLd, buildWebPageJsonLd } from "../../lib/seo";
 
 const amiri = Amiri({ subsets: ["arabic"], weight: ["400", "700"] });
 
-export const metadata: Metadata = {
-  title: "القرآن الكريم",
-  description: "قراءة سور القرآن الكريم والاستماع للتلاوة، مع صفحة تفسير صوتي مستقلة.",
-  alternates: {
-    canonical: "/quran",
-  },
-};
+export const metadata: Metadata = arSeoMeta({
+  title: "القرآن الكريم — المصحف",
+  description:
+    "اقرأ جميع سور القرآن بخط واضح، استمع للتلاوة، وانتقل بسهولة إلى تفسير صوتي لكل سورة. تجربة مريحة على الجوال والحاسوب.",
+  path: "/quran",
+});
 
 export default async function QuranPage() {
   const surahs = await getQuranApiSurahList();
@@ -24,8 +24,9 @@ export default async function QuranPage() {
   ]);
   const webPageJsonLd = buildWebPageJsonLd({
     path: "/quran",
-    name: "القرآن الكريم",
-    description: "قراءة سور القرآن الكريم والاستماع للتلاوة، مع صفحة تفسير صوتي مستقلة.",
+    name: "القرآن الكريم — المصحف",
+    description:
+      "اقرأ جميع سور القرآن بخط واضح، استمع للتلاوة، وانتقل بسهولة إلى تفسير صوتي لكل سورة. تجربة مريحة على الجوال والحاسوب.",
   });
 
   return (
