@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "أذكار المسلم",
     title: "أذكار المسلم - AdkarMuslim.com",
-    description: "مرافق إسلامي شامل: أذكار، قرآن، أدعية، حديث، وأوقات الصلاة.",
+    description: "مرافق إسلامي شامل: أذكار، قرآن، تفسير، ومواقيت الصلاة.",
     images: [
       { url: "/logo.png", width: 800, height: 512, alt: "AdkarMuslim" },
     ],
