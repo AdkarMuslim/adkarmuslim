@@ -119,7 +119,8 @@ export default function RootLayout({
         <JsonLd data={globalJsonLd} />
         <Navbar />
         <MobileHeader />
-        <div className="relative flex min-h-screen w-full min-w-0 flex-col pb-24 pt-[calc(3.75rem+env(safe-area-inset-top,0px))] lg:pt-24">
+        {/* مساحة للهيدر المتحرك: موبايل = شعار + بحث (~7rem)؛ ديسكتوب = ناف واحد */}
+        <div className="relative flex min-h-screen w-full min-w-0 flex-col pb-24 pt-[calc(7.25rem+env(safe-area-inset-top,0px))] lg:pt-24">
           <div className="flex-1">{children}</div>
           <Footer />
         </div>
