@@ -18,6 +18,11 @@ const STATIC_ROUTES = [
   "/qibla",
   "/tasbih",
   "/calendar",
+  "/about",
+  "/contact",
+  "/copyright",
+  "/privacy",
+  "/terms",
 ] as const;
 
 const ADKAR_ROUTES = [

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Tajawal } from "next/font/google";
 
 import "./globals.css";
+import Footer from "../components/Footer";
 import JsonLd from "../components/JsonLd";
 import MobileHeader from "../components/MobileHeader";
 import MobileTabBar from "../components/MobileTabBar";
@@ -118,8 +119,9 @@ export default function RootLayout({
         <JsonLd data={globalJsonLd} />
         <Navbar />
         <MobileHeader />
-        <div className="relative min-h-screen w-full min-w-0 pb-24 pt-[calc(3.75rem+env(safe-area-inset-top,0px))] lg:pt-24">
-          {children}
+        <div className="relative flex min-h-screen w-full min-w-0 flex-col pb-24 pt-[calc(3.75rem+env(safe-area-inset-top,0px))] lg:pt-24">
+          <div className="flex-1">{children}</div>
+          <Footer />
         </div>
         <MobileTabBar />
       </body>
