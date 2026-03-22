@@ -68,10 +68,14 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
-  },
+  /**
+   * أيقونة التبويب (favicon) ≠ شعار الهيدر:
+   * Next.js يولّد `<link rel="icon">` تلقائياً من الملفات التالية (أولوية أقوى من metadata.icons):
+   * - `src/app/icon.png` — حدّث هاد الملف أو استبدله (مربّع، مثلاً 32×32 أو أكبر)
+   * - `src/app/apple-icon.png` — أيقونة «إضافة للشاشة الرئيسية» على iOS
+   * شعار الهيدر الكبير: `public/logo.png` في Navbar / MobileHeader
+   * نسخ احتياطي في public: `favicon.png`, `apple-touch-icon.png`
+   */
 };
 
 export default function RootLayout({
