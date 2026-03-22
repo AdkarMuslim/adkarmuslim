@@ -3,6 +3,8 @@
  * Normalization helps match أ/إ/آ and common variants.
  */
 
+import { getQuranSurahSearchItems, QURAN_SURAH_ARABIC_NAMES } from "./quran-surah-list";
+
 export type SearchItem = {
   href: string;
   title: string;
@@ -21,7 +23,7 @@ function normalizeForSearch(s: string): string {
     .replace(/\s+/g, " ");
 }
 
-export const SITE_SEARCH_INDEX: SearchItem[] = [
+const STATIC_SEARCH_INDEX: SearchItem[] = [
   { href: "/", title: "الرئيسية", keywords: "home adkar muslim بداية" },
   { href: "/adkar", title: "الأذكار", keywords: "اذكار athkar أدعية ذكر" },
   { href: "/adkar/sabah", title: "أذكار الصباح", keywords: "صباح morning" },
@@ -64,8 +66,34 @@ export const SITE_SEARCH_INDEX: SearchItem[] = [
   { href: "/terms", title: "شروط الاستخدام", keywords: "terms شروط" },
 ];
 
+/** فهرس كامل: صفحات ثابتة + السور 1–114 (بحث مثل: البقرة، يس، kahf). */
+export const SITE_SEARCH_INDEX: SearchItem[] = [
+  ...STATIC_SEARCH_INDEX,
+  ...getQuranSurahSearchItems(),
+];
+
 export function searchSite(rawQuery: string): SearchItem[] {
-  const nq = normalizeForSearch(rawQuery);
+  const trimmed = rawQuery.trim();
+  if (!trimmed) return [];
+
+  /** أرقام فقط → سورة بالرقم (ما يخلطش "2" مع 12 و 102) */
+  const digitsOnly = trimmed.replace(/[\s\u200f\u200e]/g, "");
+  if (/^\d{1,3}$/.test(digitsOnly)) {
+    const num = parseInt(digitsOnly, 10);
+    if (num >= 1 && num <= 114) {
+      const name = QURAN_SURAH_ARABIC_NAMES[num - 1];
+      return [
+        {
+          href: `/quran/${num}`,
+          title: `سورة ${name}`,
+          keywords: String(num),
+        },
+      ];
+    }
+    return [];
+  }
+
+  const nq = normalizeForSearch(trimmed);
   if (!nq) return [];
 
   return SITE_SEARCH_INDEX.filter((item) => {
