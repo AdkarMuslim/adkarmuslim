@@ -13,28 +13,28 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mx-auto mt-12 w-full max-w-6xl px-4 pb-8 pt-6 lg:mt-16 lg:pb-10">
-      <div className="glass-panel ring-accent/0 px-4 py-6 sm:px-6">
+    <footer className="mx-auto mt-8 w-full max-w-6xl px-3 pb-6 pt-4 sm:mt-12 sm:px-4 sm:pb-8 sm:pt-6 lg:mt-16 lg:pb-10">
+      <div className="glass-panel ring-accent/0 px-3 py-3 sm:px-5 sm:py-5">
         <nav
-          className="flex flex-col gap-4 border-b border-white/10 pb-6 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-8 sm:gap-y-3"
+          className="grid grid-cols-2 gap-x-3 gap-y-1.5 border-b border-white/10 pb-3 sm:flex sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-8 sm:gap-y-2 sm:pb-5"
           aria-label="تذييل الموقع"
         >
           {footerLinks.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="group text-center text-sm text-white/80 transition hover:text-accent sm:text-right"
+              className="group rounded-lg px-1 py-1 text-center text-xs text-white/80 transition hover:bg-white/5 hover:text-accent sm:px-0 sm:py-0 sm:text-right sm:text-sm"
             >
-              <span className="font-medium">{item.labelAr}</span>
-              <span className="mt-0.5 block text-[11px] text-white/45 group-hover:text-white/55 sm:inline sm:mt-0 sm:mr-2">
+              <span className="font-medium leading-tight">{item.labelAr}</span>
+              <span className="hidden text-[11px] text-white/45 group-hover:text-white/55 lg:mr-2 lg:inline">
                 {item.labelEn}
               </span>
             </Link>
           ))}
         </nav>
 
-        <div className="pt-5 text-center">
-          <p className="text-xs text-white/50">
+        <div className="pt-3 text-center sm:pt-4">
+          <p className="text-[11px] text-white/50 sm:text-xs">
             © {year} {SITE_NAME} —{" "}
             <a
               href={SITE_URL}
@@ -43,7 +43,7 @@ export default function Footer() {
               AdkarMuslim.com
             </a>
           </p>
-          <p className="mx-auto mt-2 max-w-xl text-[11px] leading-relaxed text-white/40">
+          <p className="mx-auto mt-1.5 max-w-xl text-[10px] leading-snug text-white/38 sm:mt-2 sm:text-[11px] sm:leading-relaxed sm:text-white/40">
             محتوى ديني للتذكير والاستفادة؛ يرجى الرجوع لأهل العلم للفتاوى والأحكام.
           </p>
         </div>

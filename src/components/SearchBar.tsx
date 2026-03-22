@@ -1,14 +1,18 @@
 "use client";
 
 import { Search } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export default function SearchBar({ className }: { className?: string }) {
+  const router = useRouter();
   const [q, setQ] = useState("");
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // Placeholder: later we will wire this to /search once that page exists.
+    const trimmed = q.trim();
+    if (!trimmed) return;
+    router.push(`/search?q=${encodeURIComponent(trimmed)}`);
   };
 
   return (
