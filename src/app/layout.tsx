@@ -3,6 +3,7 @@ import { Tajawal } from "next/font/google";
 
 import "./globals.css";
 import JsonLd from "../components/JsonLd";
+import MobileHeader from "../components/MobileHeader";
 import MobileTabBar from "../components/MobileTabBar";
 import Navbar from "../components/Navbar";
 import { SITE_NAME, SITE_URL } from "../lib/seo";
@@ -116,7 +117,10 @@ export default function RootLayout({
       <body className={`${tajawal.className} antialiased min-h-screen w-full min-w-0`}>
         <JsonLd data={globalJsonLd} />
         <Navbar />
-        <div className="relative min-h-screen w-full min-w-0 pb-24 pt-24">{children}</div>
+        <MobileHeader />
+        <div className="relative min-h-screen w-full min-w-0 pb-24 pt-[calc(3.75rem+env(safe-area-inset-top,0px))] lg:pt-24">
+          {children}
+        </div>
         <MobileTabBar />
       </body>
     </html>
