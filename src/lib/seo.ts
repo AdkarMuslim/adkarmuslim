@@ -1,5 +1,63 @@
-export const SITE_URL = "https://adkarmuslim.com";
+/**
+ * الدومين النهائي (www) — يطابق التوجيه من apex؛ يُستخدم للـ sitemap و JSON-LD و canonical عبر metadataBase.
+ */
+export const CANONICAL_SITE_ORIGIN = "https://www.adkarmuslim.com";
+
+export const SITE_URL = CANONICAL_SITE_ORIGIN;
 export const SITE_NAME = "أذكار المسلم";
+
+/** يحوّل https://adkarmuslim.com → https://www.adkarmuslim.com */
+function normalizeAdkarApexToWww(u: URL): URL {
+  if (u.hostname.toLowerCase() === "adkarmuslim.com") {
+    return new URL(`${u.pathname}${u.search}${u.hash}`, CANONICAL_SITE_ORIGIN);
+  }
+  return u;
+}
+
+/**
+ * `metadataBase` في layout: حلّ الروابط النسبية في metadata (canonical، OG، إلخ).
+ * - **إنتاج Vercel** (`VERCEL_ENV=production`): دائماً `https://www.adkarmuslim.com` — بدون اختلاط مع apex أو localhost.
+ * - **بريفيو Vercel**: دومين الـ deployment المؤقت.
+ * - **تطوير محلي** (`npm run dev`): localhost أو env.
+ *
+ * ملاحظة: مسارات `/_next/static` للـ CSS/JS لا تُبنى من metadataBase؛ تبقى نسبية لنفس الـ origin.
+ */
+export function getMetadataBaseUrl(): URL {
+  const fallback = new URL(CANONICAL_SITE_ORIGIN);
+
+  if (process.env.NODE_ENV === "production") {
+    if (process.env.VERCEL_ENV === "preview" && process.env.VERCEL_URL) {
+      return new URL(`https://${process.env.VERCEL_URL}`);
+    }
+    // إنتاج Vercel + `next start` محليًا: www ثابت
+    return fallback;
+  }
+
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (raw) {
+    try {
+      const u = new URL(raw);
+      const host = u.hostname.toLowerCase();
+      const isLocal =
+        host === "localhost" ||
+        host === "127.0.0.1" ||
+        host === "[::1]" ||
+        host.endsWith(".localhost");
+      if (!isLocal) {
+        return normalizeAdkarApexToWww(u);
+      }
+      return u;
+    } catch {
+      // ignore invalid URL
+    }
+  }
+
+  if (process.env.VERCEL_URL) {
+    return new URL(`https://${process.env.VERCEL_URL}`);
+  }
+
+  return fallback;
+}
 
 export function buildBreadcrumbJsonLd(
   items: Array<{ name: string; path: string }>,

@@ -27,7 +27,7 @@ git push -u origin main
   - إلا المشروع داخل `adkarmuslim` → اكتب **`adkarmuslim`**
 - **Output Directory**: **فارغ**
 - **Environment Variables**:
-  - `NEXT_PUBLIC_SITE_URL` = `https://adkarmuslim.com`
+  - `NEXT_PUBLIC_SITE_URL` = `https://www.adkarmuslim.com`
   - (اختياري) `NEXT_PUBLIC_CONTACT_EMAIL` = بريدك لصفحات «اتصل بنا» و«حقوق النشر»
 
 ## 3) إلا الموقع بلا Tailwind (صفحة مفكّكة)

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = "https://adkarmuslim.com";
+import { CANONICAL_SITE_ORIGIN } from "../lib/seo";
 
 const STATIC_ROUTES = [
   "",
@@ -52,14 +52,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const staticEntries: MetadataRoute.Sitemap = [...STATIC_ROUTES, ...ADKAR_ROUTES].map((path) => ({
-    url: `${BASE_URL}${path}`,
+    url: `${CANONICAL_SITE_ORIGIN}${path}`,
     lastModified: now,
     changeFrequency: "daily",
     priority: path === "" ? 1 : 0.8,
   }));
 
   const quranEntries: MetadataRoute.Sitemap = Array.from({ length: 114 }, (_, i) => ({
-    url: `${BASE_URL}/quran/${i + 1}`,
+    url: `${CANONICAL_SITE_ORIGIN}/quran/${i + 1}`,
     lastModified: now,
     changeFrequency: "weekly",
     priority: 0.7,

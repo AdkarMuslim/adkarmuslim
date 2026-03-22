@@ -7,28 +7,14 @@ import JsonLd from "../components/JsonLd";
 import MobileHeader from "../components/MobileHeader";
 import MobileTabBar from "../components/MobileTabBar";
 import Navbar from "../components/Navbar";
-import { SITE_NAME, SITE_URL } from "../lib/seo";
+import { getMetadataBaseUrl, SITE_NAME, SITE_URL } from "../lib/seo";
 
 const tajawal = Tajawal({
   subsets: ["arabic"],
   weight: ["400", "500", "700"],
 });
 
-/** Production: set NEXT_PUBLIC_SITE_URL=https://adkarmuslim.com in Vercel env for correct canonical/OG on custom domain. */
-function siteMetadataBase(): URL {
-  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (fromEnv) {
-    try {
-      return new URL(fromEnv);
-    } catch {
-      // fall through
-    }
-  }
-  if (process.env.VERCEL_URL) {
-    return new URL(`https://${process.env.VERCEL_URL}`);
-  }
-  return new URL("https://adkarmuslim.com");
-}
+/** انظر `getMetadataBaseUrl` — الإنتاج دائماً www.adkarmuslim.com (canonical) إلا إن وُضع دومين حقيقي (ليس localhost). */
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -37,7 +23,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: siteMetadataBase(),
+  metadataBase: getMetadataBaseUrl(),
   title: {
     default: "أذكار المسلم - AdkarMuslim.com",
     template: "%s | أذكار المسلم",

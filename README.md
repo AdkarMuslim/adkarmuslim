@@ -41,7 +41,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 2. **Output Directory** لازم يبقى **فارغ** لمشاريع Next.js (ما تستعمل `out` إلا إذا عملت static export بشكل صريح).
 3. **Framework Preset** = Next.js (تلقائي غالباً).
 4. لا تضبط Install Command يحذف الحزم المطلوبة للبناء (مثل `npm install --omit=dev`).
-5. في **Environment Variables**: `NEXT_PUBLIC_SITE_URL` = `https://adkarmuslim.com` (دومينك النهائي).
+5. في **Environment Variables**: `NEXT_PUBLIC_SITE_URL` = `https://www.adkarmuslim.com` (الدومين الكنسي النهائي مع www).
 6. إذا الدومين يمر على **Cloudflare**: عطّل **Rocket Loader** و **Auto Minify (HTML/JS/CSS)** للدومين ديالك؛ أحياناً كيكسروا تحميل ملفات `_next/static`.
 7. دفع آخر commit ثم **Redeploy** (أو Clear cache ثم redeploy).
 8. **معاينات فيسبوك/تويتر (OG):** المشروع ما كيستعملش `opengraph-image.tsx` (Satori كيعطي أخطاء على Vercel). الصورة من `metadata` تشير لـ `/logo.png` — لازم يكون `public/logo.png` موجود فالريبو. للأحسن: صورة أفقية **1200×630** باسم مثلاً `opengraph-image.png` وحدّث `layout.tsx` → `openGraph.images` و `twitter.images`.
