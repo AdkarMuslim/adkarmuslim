@@ -1,5 +1,6 @@
 "use client";
 
+import SeoContentFooter from "../../../components/SeoContentFooter";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { RotateCcw, Share2 } from "lucide-react";
@@ -91,7 +92,10 @@ export default function AnbiyaDuaaPage() {
         <div className="flex items-start justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-white sm:text-3xl">أدعية الأنبياء</h1>
-            <p className="mt-2 text-sm text-white/60">أدعية الأنبياء من القرآن الكريم.</p>
+            <p className="mt-3 text-sm leading-relaxed text-white/75">
+              أدعية الأنبياء مكتوبة كاملة كما وردت في القرآن: نص واضح مع عداد للتأمل والحفظ على AdkarMuslim.
+            </p>
+            <p className="mt-2 text-sm text-white/55">اضغط الزر لإكمال العدد لكل دعاء.</p>
           </div>
           <div className="flex items-center gap-2">
             <button type="button" onClick={onShare} className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5">
@@ -153,6 +157,14 @@ export default function AnbiyaDuaaPage() {
             );
           })}
         </div>
+
+        <SeoContentFooter
+          section="duaa"
+          related={[
+            { href: "/duaa/quranic", label: "الأدعية القرآنية" },
+            { href: "/duaa/jawami3", label: "جوامع الدعاء" },
+          ]}
+        />
       </section>
     </main>
   );

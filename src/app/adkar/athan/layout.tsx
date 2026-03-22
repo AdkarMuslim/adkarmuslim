@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { arSeoMeta } from "../../../lib/ar-seo-meta";
+import JsonLd from "../../../components/JsonLd";
+import { ADKAR_ROUTES } from "../../../lib/seo-route-presets";
+import { buildSectionSeoLayout } from "../../../lib/section-seo";
 
-export const metadata: Metadata = arSeoMeta({
-  title: "أذكار الأذان والإقامة",
-  description:
-    "الدعاء والذكر عند سماع الأذان والإقامة وفق السنة النبوية، بصياغة واضحة للحفظ والمراجعة.",
-  path: "/adkar/athan",
-});
+const seo = buildSectionSeoLayout(ADKAR_ROUTES.athan);
 
-export default function Layout({ children }: { children: ReactNode }) {
-  return children;
+export const metadata: Metadata = seo.metadata;
+
+export default function AthanLayout({ children }: { children: ReactNode }) {
+  return (
+    <>
+      <JsonLd data={seo.breadcrumbJsonLd} />
+      <JsonLd data={seo.webPageJsonLd} />
+      <JsonLd data={seo.articleJsonLd} />
+      {children}
+    </>
+  );
 }

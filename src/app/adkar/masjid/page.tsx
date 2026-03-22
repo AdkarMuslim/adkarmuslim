@@ -1,5 +1,6 @@
 "use client";
 
+import SeoContentFooter from "../../../components/SeoContentFooter";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, RotateCcw, Share2 } from "lucide-react";
@@ -111,7 +112,11 @@ export default function AdkarMasjidPage() {
         <div className="flex items-start justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-white sm:text-3xl">أذكار المسجد</h1>
-            <p className="mt-2 text-sm text-white/60">أذكار عند الذهاب للمسجد، وعند الدخول والخروج.</p>
+            <p className="mt-3 text-sm leading-relaxed text-white/75">
+              أذكار المسجد مكتوبة كاملة: الدخول والخروج والصلاة فيه وآداب بيت الله، مع عداد تفاعلي لمراجعة أذكارك
+              بسهولة.
+            </p>
+            <p className="mt-2 text-sm text-white/55">اضغط الزر لكل ذكر حتى تُكمل العدد المطلوب.</p>
           </div>
           <div className="flex items-center gap-2">
             <button
@@ -256,6 +261,14 @@ export default function AdkarMasjidPage() {
             );
           })}
         </div>
+
+        <SeoContentFooter
+          section="adkar"
+          related={[
+            { href: "/adkar/wudoo", label: "أذكار الوضوء" },
+            { href: "/adkar/athan", label: "أذكار الأذان" },
+          ]}
+        />
       </section>
     </main>
   );

@@ -1,4 +1,9 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+import { notFound404Metadata } from "../lib/ar-seo-meta";
+
+export const metadata: Metadata = notFound404Metadata();
 
 export default function NotFound() {
   return (

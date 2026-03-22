@@ -1,5 +1,6 @@
 "use client";
 
+import SeoContentFooter from "../../../components/SeoContentFooter";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, RotateCcw, Share2 } from "lucide-react";
@@ -106,8 +107,11 @@ export default function AdkarTaamPage() {
       <section className="glass-panel ring-accent/0 p-5 sm:p-7">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-white sm:text-3xl">أذكار الطعام</h1>
-            <p className="mt-2 text-sm text-white/60">أذكار عند الطعام والشراب والضيف.</p>
+            <h1 className="text-2xl font-bold text-white sm:text-3xl">أذكار الطعام والشراب</h1>
+            <p className="mt-3 text-sm leading-relaxed text-white/75">
+              أذكار الطعام والشراب مكتوبة كاملة: بسم الله وأذكار قبل وبعد الأكل والضيافة من السنة، مع عداد تفاعلي.
+            </p>
+            <p className="mt-2 text-sm text-white/55">اضغط الزر لكل ذكر حتى تُكمل العدد المطلوب.</p>
           </div>
           <div className="flex items-center gap-2">
             <button
@@ -252,6 +256,14 @@ export default function AdkarTaamPage() {
             );
           })}
         </div>
+
+        <SeoContentFooter
+          section="adkar"
+          related={[
+            { href: "/adkar/khalaa", label: "أذكار اللباس" },
+            { href: "/adkar/sabah", label: "أذكار الصباح" },
+          ]}
+        />
       </section>
     </main>
   );

@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { arSeoMeta } from "../../../lib/ar-seo-meta";
+import JsonLd from "../../../components/JsonLd";
+import { ADKAR_ROUTES } from "../../../lib/seo-route-presets";
+import { buildSectionSeoLayout } from "../../../lib/section-seo";
 
-export const metadata: Metadata = arSeoMeta({
-  title: "التسبيح والتهليل",
-  description:
-    "أذكار التسبيح والتهليل والتحميد بعد الصلاة وفي أوقات النهار، مع عداد تفاعلي للمراجعة.",
-  path: "/adkar/tasabih",
-});
+const seo = buildSectionSeoLayout(ADKAR_ROUTES.tasabih);
 
-export default function Layout({ children }: { children: ReactNode }) {
-  return children;
+export const metadata: Metadata = seo.metadata;
+
+export default function TasabihLayout({ children }: { children: ReactNode }) {
+  return (
+    <>
+      <JsonLd data={seo.breadcrumbJsonLd} />
+      <JsonLd data={seo.webPageJsonLd} />
+      <JsonLd data={seo.articleJsonLd} />
+      {children}
+    </>
+  );
 }

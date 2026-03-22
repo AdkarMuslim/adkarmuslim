@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { arSeoMeta } from "../../../lib/ar-seo-meta";
+import JsonLd from "../../../components/JsonLd";
+import { ADKAR_ROUTES } from "../../../lib/seo-route-presets";
+import { buildSectionSeoLayout } from "../../../lib/section-seo";
 
-export const metadata: Metadata = arSeoMeta({
-  title: "أذكار ما حول الصلاة",
-  description:
-    "أذكار قبل وبعد الصلاة وبين السجدتين وعند دخول وخروج المسجد، وفق السنة، بعرض مرتب وعداد تفاعلي.",
-  path: "/adkar/salah",
-});
+const seo = buildSectionSeoLayout(ADKAR_ROUTES.salah);
 
-export default function Layout({ children }: { children: ReactNode }) {
-  return children;
+export const metadata: Metadata = seo.metadata;
+
+export default function SalahLayout({ children }: { children: ReactNode }) {
+  return (
+    <>
+      <JsonLd data={seo.breadcrumbJsonLd} />
+      <JsonLd data={seo.webPageJsonLd} />
+      <JsonLd data={seo.articleJsonLd} />
+      {children}
+    </>
+  );
 }

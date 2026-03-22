@@ -1,30 +1,18 @@
 import type { Metadata } from "next";
 import JsonLd from "../../components/JsonLd";
-import { arSeoMeta } from "../../lib/ar-seo-meta";
-import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildWebPageJsonLd } from "../../lib/seo";
+import { INDEX_PAGES } from "../../lib/seo-route-presets";
+import { buildTwoLevelSeoLayout } from "../../lib/section-seo";
+import { buildFaqJsonLd } from "../../lib/seo";
 
-export const metadata: Metadata = arSeoMeta({
-  title: "مواقيت الصلاة",
-  description:
-    "أوقات الفجر والظهر والعصر والمغرب والعشاء حسب مدينتك أو GPS، مع ضبط طريقة الحساب وتجربة سريعة على الجوال.",
-  path: "/prayer-times",
-});
+const seo = buildTwoLevelSeoLayout(INDEX_PAGES.prayerTimes);
+
+export const metadata: Metadata = seo.metadata;
 
 export default function PrayerTimesLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
-    { name: "الرئيسية", path: "/" },
-    { name: "مواقيت الصلاة", path: "/prayer-times" },
-  ]);
-  const webPageJsonLd = buildWebPageJsonLd({
-    path: "/prayer-times",
-    name: "مواقيت الصلاة",
-    description:
-      "أوقات الفجر والظهر والعصر والمغرب والعشاء حسب مدينتك أو GPS، مع ضبط طريقة الحساب وتجربة سريعة على الجوال.",
-  });
   const faqJsonLd = buildFaqJsonLd([
     {
       question: "كيف يتم تحديد طريقة الحساب الأنسب تلقائيا؟",
@@ -44,8 +32,8 @@ export default function PrayerTimesLayout({
 
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd} />
-      <JsonLd data={webPageJsonLd} />
+      <JsonLd data={seo.breadcrumbJsonLd} />
+      <JsonLd data={seo.webPageJsonLd} />
       <JsonLd data={faqJsonLd} />
       {children}
     </>

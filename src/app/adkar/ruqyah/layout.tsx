@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { arSeoMeta } from "../../../lib/ar-seo-meta";
+import JsonLd from "../../../components/JsonLd";
+import { ADKAR_ROUTES } from "../../../lib/seo-route-presets";
+import { buildSectionSeoLayout } from "../../../lib/section-seo";
 
-export const metadata: Metadata = arSeoMeta({
-  title: "الرقية الشرعية",
-  description:
-    "آيات وأدعية الرقية من القرآن والسنة المأثورة، منظمة للتلاوة والمداومة بطمأنينة وثقة بالله.",
-  path: "/adkar/ruqyah",
-});
+const seo = buildSectionSeoLayout(ADKAR_ROUTES.ruqyah);
 
-export default function Layout({ children }: { children: ReactNode }) {
-  return children;
+export const metadata: Metadata = seo.metadata;
+
+export default function RuqyahLayout({ children }: { children: ReactNode }) {
+  return (
+    <>
+      <JsonLd data={seo.breadcrumbJsonLd} />
+      <JsonLd data={seo.webPageJsonLd} />
+      <JsonLd data={seo.articleJsonLd} />
+      {children}
+    </>
+  );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import SeoContentFooter from "../../../components/SeoContentFooter";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, RotateCcw, Share2 } from "lucide-react";
@@ -109,8 +110,11 @@ export default function KhatmQuranDuaPage() {
       <section className="glass-panel ring-accent/0 p-5 sm:p-7">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-white sm:text-3xl">دعاء ختم القرآن الكريم</h1>
-            <p className="mt-2 text-sm text-white/60">ذكر واحد عند إتمام قراءة القرآن.</p>
+            <h1 className="text-2xl font-bold text-white sm:text-3xl">أذكار ختم القرآن</h1>
+            <p className="mt-3 text-sm leading-relaxed text-white/75">
+              أذكار ختم القرآن مكتوبة كاملة: دعاء وذكر عند إتمام ختمة المصحف بخشوع، مع عرض واضح للنص.
+            </p>
+            <p className="mt-2 text-sm text-white/55">أكمل العدد عند الحاجة بالزر أدناه.</p>
           </div>
           <div className="flex items-center gap-2">
             <button
@@ -257,6 +261,14 @@ export default function KhatmQuranDuaPage() {
             );
           })}
         </div>
+
+        <SeoContentFooter
+          section="adkar"
+          related={[
+            { href: "/quran", label: "القرآن الكريم" },
+            { href: "/adkar/sabah", label: "أذكار الصباح" },
+          ]}
+        />
       </section>
     </main>
   );

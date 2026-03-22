@@ -5,17 +5,14 @@ import JsonLd from "../../../components/JsonLd";
 import TafsirPageClient from "../../../components/TafsirPageClient";
 import { getAllTafsirData } from "../../../lib/tafsirapi";
 import { getQuranApiSurahList } from "../../../lib/quranapi";
-import { arSeoMeta } from "../../../lib/ar-seo-meta";
-import { buildBreadcrumbJsonLd, buildWebPageJsonLd } from "../../../lib/seo";
+import { QURAN_CHILD_PAGES } from "../../../lib/seo-route-presets";
+import { buildQuranChildSeoLayout } from "../../../lib/section-seo";
 
 const amiri = Amiri({ subsets: ["arabic"], weight: ["400", "700"] });
 
-export const metadata: Metadata = arSeoMeta({
-  title: "تفسير القرآن الصوتي",
-  description:
-    "استمع لتفسير مقاطع من سور القرآن: اختر السورة والمقطع المتاح، بتجربة عربية بسيطة وواضحة.",
-  path: "/quran/tafsir",
-});
+const seo = buildQuranChildSeoLayout(QURAN_CHILD_PAGES.tafsir);
+
+export const metadata: Metadata = seo.metadata;
 
 export default async function TafsirPage({
   searchParams,
@@ -27,22 +24,11 @@ export default async function TafsirPage({
   const raw = searchParams?.surah;
   const surahParam = Array.isArray(raw) ? raw[0] : raw;
   const defaultSurah = Math.min(114, Math.max(1, Number(surahParam) || 1));
-  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
-    { name: "الرئيسية", path: "/" },
-    { name: "القرآن الكريم", path: "/quran" },
-    { name: "تفسير القرآن الصوتي", path: "/quran/tafsir" },
-  ]);
-  const webPageJsonLd = buildWebPageJsonLd({
-    path: "/quran/tafsir",
-    name: "تفسير القرآن الصوتي",
-    description:
-      "استمع لتفسير مقاطع من سور القرآن: اختر السورة والمقطع المتاح، بتجربة عربية بسيطة وواضحة.",
-  });
-
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd} />
-      <JsonLd data={webPageJsonLd} />
+      <JsonLd data={seo.breadcrumbJsonLd} />
+      <JsonLd data={seo.webPageJsonLd} />
+      <JsonLd data={seo.articleJsonLd} />
       <main className="mx-auto w-full max-w-4xl px-3 pb-28 sm:px-4">
         <section className="glass-panel ring-accent/0 p-5 sm:p-7">
         <div className="flex items-start justify-between gap-4">
@@ -57,8 +43,12 @@ export default async function TafsirPage({
           </Link>
         </div>
 
-        <p className="mt-2 text-sm text-white/60">
-          اختر سورة للاستماع لتفسيرها الصوتي.
+        <p className="mt-3 text-sm leading-relaxed text-white/65">
+          تفسير القرآن صوتياً: اختر السورة والمقطع المتاح للاستماع بترتيب واضح. للمصحف المكتوب راجع{" "}
+          <Link href="/quran" className="text-accent underline-offset-2 hover:underline">
+            القرآن الكريم
+          </Link>
+          .
         </p>
 
         <TafsirPageClient

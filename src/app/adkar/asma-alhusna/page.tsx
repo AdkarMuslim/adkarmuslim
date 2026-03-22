@@ -1,5 +1,6 @@
 "use client";
 
+import SeoContentFooter from "../../../components/SeoContentFooter";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, Copy, Share2 } from "lucide-react";
@@ -86,9 +87,11 @@ export default function AsmaAlhusnaPage() {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <h1 className="text-2xl font-bold text-white sm:text-3xl">أسماء الله الحسنى</h1>
-            <p className="mt-2 text-sm text-white/60">
-              اضغط على أي اسم لعرض الشرح (معنى كل جزء من الاسم).
+            <p className="mt-3 text-sm leading-relaxed text-white/75">
+              أسماء الله الحسنى مكتوبة كاملة للذكر والتأمل: اضغط على أي اسم لعرض معنى مبسّط، وتدرّج في الحفظ
+              والدعاء بأسمائه تعالى.
             </p>
+            <p className="mt-2 text-sm text-white/55">يمكنك نسخ الاسم أو مشاركته من الأزرار أعلاه.</p>
           </div>
 
           <div className="flex items-center gap-2">
@@ -431,6 +434,14 @@ export default function AsmaAlhusnaPage() {
             </>
           ) : null}
         </AnimatePresence>
+
+        <SeoContentFooter
+          section="adkar"
+          related={[
+            { href: "/adkar/tasabih", label: "التسبيح" },
+            { href: "/duaa/quranic", label: "الأدعية القرآنية" },
+          ]}
+        />
       </section>
     </main>
   );

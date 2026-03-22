@@ -1,5 +1,6 @@
 "use client";
 
+import SeoContentFooter from "../../../components/SeoContentFooter";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, RotateCcw, Share2 } from "lucide-react";
@@ -256,6 +257,14 @@ export default function AdkarWudooPage() {
             );
           })}
         </div>
+
+        <SeoContentFooter
+          section="adkar"
+          related={[
+            { href: "/adkar/salah", label: "أذكار الصلاة" },
+            { href: "/adkar/masjid", label: "أذكار المسجد" },
+          ]}
+        />
       </section>
     </main>
   );

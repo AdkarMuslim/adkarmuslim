@@ -37,6 +37,39 @@ export function buildWebPageJsonLd(input: {
   };
 }
 
+/** مقال/صفحة محتوى للأذكار — يكمّل WebPage ولا يستبدل canonical */
+export function buildArticleJsonLd(input: {
+  path: string;
+  headline: string;
+  description: string;
+}): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    url: `${SITE_URL}${input.path}`,
+    headline: input.headline,
+    description: input.description,
+    inLanguage: "ar",
+    author: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}${input.path}`,
+    },
+  };
+}
+
 export function buildFaqJsonLd(
   items: Array<{ question: string; answer: string }>,
 ): Record<string, unknown> {

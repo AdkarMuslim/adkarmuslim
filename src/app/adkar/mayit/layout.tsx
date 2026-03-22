@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { arSeoMeta } from "../../../lib/ar-seo-meta";
+import JsonLd from "../../../components/JsonLd";
+import { ADKAR_ROUTES } from "../../../lib/seo-route-presets";
+import { buildSectionSeoLayout } from "../../../lib/section-seo";
 
-export const metadata: Metadata = arSeoMeta({
-  title: "أدعية للميت",
-  description:
-    "أدعية وأذكار للميت والاستغفار له والرحمة، من السنة، بعرض مرتب للمراجعة عند الفقد أو زيارة القبر.",
-  path: "/adkar/mayit",
-});
+const seo = buildSectionSeoLayout(ADKAR_ROUTES.mayit);
 
-export default function Layout({ children }: { children: ReactNode }) {
-  return children;
+export const metadata: Metadata = seo.metadata;
+
+export default function MayitLayout({ children }: { children: ReactNode }) {
+  return (
+    <>
+      <JsonLd data={seo.breadcrumbJsonLd} />
+      <JsonLd data={seo.webPageJsonLd} />
+      <JsonLd data={seo.articleJsonLd} />
+      {children}
+    </>
+  );
 }

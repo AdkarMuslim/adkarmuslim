@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, RotateCcw, Share2 } from "lucide-react";
@@ -110,8 +111,12 @@ export default function AdkarMassaPage() {
         <div className="flex items-start justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-white sm:text-3xl">أذكار المساء</h1>
-            <p className="mt-2 text-sm text-white/60">
-              اختَر أي ذكر تريده، واضغط على زرّ العدّ الخاص به بدون ترتيب إجباري.
+            <p className="mt-3 text-sm leading-relaxed text-white/75">
+              أذكار المساء مكتوبة كاملة لختم نهارك بذكر الله: أنصت للنصوص من السنة وكرّرها بالعداد كما يناسبك بعد
+              العصر أو المغرب. جزء مهم من حصن المسلم اليومي.
+            </p>
+            <p className="mt-2 text-sm text-white/55">
+              اختَر أي ذكر تريده، واضغط على زرّ العدّ الخاص به.
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -254,6 +259,23 @@ export default function AdkarMassaPage() {
             );
           })}
         </div>
+
+        <footer className="mt-8 border-t border-white/10 pt-5 text-sm leading-relaxed text-white/55">
+          <p>
+            للصباح:{" "}
+            <Link href="/adkar/sabah" className="text-accent underline-offset-2 hover:underline">
+              أذكار الصباح
+            </Link>
+            . وللنوم:{" "}
+            <Link href="/adkar/nawm" className="text-accent underline-offset-2 hover:underline">
+              أذكار النوم
+            </Link>
+            .{" "}
+            <Link href="/adkar" className="text-accent underline-offset-2 hover:underline">
+              فهرس الأذكار
+            </Link>
+          </p>
+        </footer>
       </section>
     </main>
   );

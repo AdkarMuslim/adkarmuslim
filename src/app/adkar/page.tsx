@@ -39,6 +39,29 @@ export default function AdkarIndexPage() {
             <p className="mt-2 text-sm text-white/60">
               اختر القسم الذي تريد، وكلما أكملت العدّ سننتقل للذكر الموالي.
             </p>
+            <p className="mt-4 text-sm leading-relaxed text-white/65">
+              للبداية السريعة:{" "}
+              <Link href="/adkar/sabah" className="font-medium text-accent underline-offset-2 hover:underline">
+                أذكار الصباح
+              </Link>{" "}
+              مكتوبة كاملة مع عداد، ثم{" "}
+              <Link href="/adkar/massa" className="font-medium text-accent underline-offset-2 hover:underline">
+                أذكار المساء
+              </Link>
+              ،{" "}
+              <Link href="/adkar/nawm" className="font-medium text-accent underline-offset-2 hover:underline">
+                أذكار النوم
+              </Link>
+              ،{" "}
+              <Link href="/adkar/istiqadh" className="font-medium text-accent underline-offset-2 hover:underline">
+                أذكار الاستيقاظ
+              </Link>
+              ، و{" "}
+              <Link href="/adkar/salat" className="font-medium text-accent underline-offset-2 hover:underline">
+                أذكار بعد الصلاة
+              </Link>
+              .
+            </p>
           </div>
           <div className="hidden sm:block">
             <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/20 text-accent">

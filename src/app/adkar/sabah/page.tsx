@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import dhikrsData from "../../../../data/adkar-sabah.json";
@@ -128,8 +129,12 @@ export default function AdkarSabahPage() {
         <div className="flex items-start justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-white sm:text-3xl">أذكار الصباح</h1>
-            <p className="mt-2 text-sm text-white/60">
-              اختَر أي ذكر تريده، واضغط على زرّ العدّ الخاص به بدون ترتيب إجباري.
+            <p className="mt-3 text-sm leading-relaxed text-white/75">
+              هنا تجد أذكار الصباح مكتوبة كاملة ضمن حصن المسلم اليومي: نصوص من القرآن والسنة مع ترجمة تسهّل الفهم.
+              استخدم العداد بعد الفجر لمراجعة الأذكار بخشوع؛ لا يشترط إتمام الذكر الأول قبل الثاني.
+            </p>
+            <p className="mt-2 text-sm text-white/55">
+              اختَر أي ذكر تريده، واضغط على زرّ العدّ الخاص به.
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -277,6 +282,24 @@ export default function AdkarSabahPage() {
             );
           })}
         </div>
+
+        <footer className="mt-8 border-t border-white/10 pt-5 text-sm leading-relaxed text-white/55">
+          <p>
+            تابع حصنك اليومي: بعد المساء جرّب{" "}
+            <Link href="/adkar/massa" className="text-accent underline-offset-2 hover:underline">
+              أذكار المساء
+            </Link>
+            ، وللنوم{" "}
+            <Link href="/adkar/nawm" className="text-accent underline-offset-2 hover:underline">
+              أذكار النوم
+            </Link>
+            . رجوع إلى{" "}
+            <Link href="/adkar" className="text-accent underline-offset-2 hover:underline">
+              فهرس الأذكار
+            </Link>
+            .
+          </p>
+        </footer>
       </section>
     </main>
   );

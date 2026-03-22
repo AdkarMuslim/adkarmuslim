@@ -1,5 +1,6 @@
 "use client";
 
+import SeoContentFooter from "../../../components/SeoContentFooter";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, RotateCcw, Share2 } from "lucide-react";
@@ -111,8 +112,12 @@ export default function AdkarAthanPage() {
       <section className="glass-panel ring-accent/0 p-5 sm:p-7">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-white sm:text-3xl">أذكار الآذان</h1>
-            <p className="mt-2 text-sm text-white/60">أذكار عند سماع الأذان وما بعده.</p>
+            <h1 className="text-2xl font-bold text-white sm:text-3xl">أذكار الأذان والإقامة</h1>
+            <p className="mt-3 text-sm leading-relaxed text-white/75">
+              أذكار الأذان والإقامة مكتوبة كاملة: الدعاء عند سماع الأذان وعند الإقامة وفق السنة، مع عداد يذكّرك
+              بعدد التسبيح والدعاء.
+            </p>
+            <p className="mt-2 text-sm text-white/55">اضغط الزر لكل ذكر حتى تُكمل العدد المطلوب.</p>
           </div>
           <div className="flex items-center gap-2">
             <button
@@ -248,6 +253,14 @@ export default function AdkarAthanPage() {
             );
           })}
         </div>
+
+        <SeoContentFooter
+          section="adkar"
+          related={[
+            { href: "/adkar/masjid", label: "أذكار المسجد" },
+            { href: "/adkar/salah", label: "أذكار الصلاة" },
+          ]}
+        />
       </section>
     </main>
   );

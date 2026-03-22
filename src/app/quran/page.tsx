@@ -4,42 +4,39 @@ import type { Metadata } from "next";
 import JsonLd from "../../components/JsonLd";
 import { quranMushafFont } from "../../lib/quran-font";
 import { getQuranApiSurahList } from "../../lib/quranapi";
-import { arSeoMeta } from "../../lib/ar-seo-meta";
-import { buildBreadcrumbJsonLd, buildWebPageJsonLd } from "../../lib/seo";
+import { INDEX_PAGES } from "../../lib/seo-route-presets";
+import { buildTwoLevelSeoLayout } from "../../lib/section-seo";
 
 const amiri = Amiri({ subsets: ["arabic"], weight: ["400", "700"] });
 
-export const metadata: Metadata = arSeoMeta({
-  title: "القرآن الكريم — المصحف",
-  description:
-    "اقرأ جميع سور القرآن بخط واضح، استمع للتلاوة، وانتقل بسهولة إلى تفسير صوتي لكل سورة. تجربة مريحة على الجوال والحاسوب.",
-  path: "/quran",
-});
+const seo = buildTwoLevelSeoLayout(INDEX_PAGES.quran);
+
+export const metadata: Metadata = seo.metadata;
 
 export default async function QuranPage() {
   const surahs = await getQuranApiSurahList();
-  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
-    { name: "الرئيسية", path: "/" },
-    { name: "القرآن الكريم", path: "/quran" },
-  ]);
-  const webPageJsonLd = buildWebPageJsonLd({
-    path: "/quran",
-    name: "القرآن الكريم — المصحف",
-    description:
-      "اقرأ جميع سور القرآن بخط واضح، استمع للتلاوة، وانتقل بسهولة إلى تفسير صوتي لكل سورة. تجربة مريحة على الجوال والحاسوب.",
-  });
-
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd} />
-      <JsonLd data={webPageJsonLd} />
+      <JsonLd data={seo.breadcrumbJsonLd} />
+      <JsonLd data={seo.webPageJsonLd} />
       <main className="mx-auto w-full max-w-4xl px-3 pb-28 sm:px-4">
         <section className="glass-panel ring-accent/0 p-5 sm:p-7">
         <h1 className={`text-2xl font-bold text-white sm:text-3xl ${amiri.className}`}>
           القرآن الكريم
         </h1>
 
-        <p className="mt-2 text-sm text-white/60">اختر سورة لعرض آياتها والاستماع للتلاوة.</p>
+        <p className="mt-3 text-sm leading-relaxed text-white/65">
+          القرآن الكريم مكتوب كاملاً هنا: اختر سورة لعرض آياتها والاستماع للتلاوة، ثم انتقل لتفسير صوتي عند الحاجة.
+          للأذكار والأدعية راجع{" "}
+          <Link href="/adkar" className="text-accent underline-offset-2 hover:underline">
+            الأذكار
+          </Link>{" "}
+          و{" "}
+          <Link href="/duaa" className="text-accent underline-offset-2 hover:underline">
+            الأدعية
+          </Link>
+          .
+        </p>
 
         <Link
           href="/quran/tafsir"
