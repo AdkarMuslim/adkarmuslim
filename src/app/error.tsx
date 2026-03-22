@@ -15,8 +15,8 @@ export default function Error({
 
   return (
     <main className="mx-auto flex min-h-[50vh] w-full max-w-lg flex-col items-center justify-center gap-4 px-4 py-16 text-center">
-      <h1 className="text-xl font-bold text-white">حدث خطأ</h1>
-      <p className="text-sm text-white/65 leading-relaxed">
+      <h1 className="text-xl font-bold text-zinc-900 dark:text-white">حدث خطأ</h1>
+      <p className="text-sm leading-relaxed text-zinc-600 dark:text-white/65">
         تعذّر تحميل هذه الصفحة. جرّب التحديث أو أعد المحاولة.
       </p>
       <button

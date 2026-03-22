@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { getOgShareImages } from "./seo";
+
 const SITE = "أذكار المسلم";
 
 /**
@@ -37,11 +39,14 @@ export function arSeoMeta(opts: {
       siteName: SITE,
       title: displayTitle,
       description: opts.description,
+      /** بدون هذا الحقل، تعريف OG في الصفحة يستبدل تعريف الجذر ويختفي og:image → واتساب يعرض أيقونة افتراضية */
+      images: getOgShareImages(),
     },
     twitter: {
       card: "summary_large_image",
       title: displayTitle,
       description: opts.description,
+      images: getOgShareImages().map((img) => img.url),
     },
   };
 }
@@ -69,11 +74,13 @@ export function notFound404Metadata(): Metadata {
       siteName: SITE,
       title: displayTitle,
       description,
+      images: getOgShareImages(),
     },
     twitter: {
       card: "summary_large_image",
       title: displayTitle,
       description,
+      images: getOgShareImages().map((img) => img.url),
     },
   };
 }

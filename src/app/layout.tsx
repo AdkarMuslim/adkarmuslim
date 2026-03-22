@@ -7,7 +7,7 @@ import JsonLd from "../components/JsonLd";
 import MobileHeader from "../components/MobileHeader";
 import MobileTabBar from "../components/MobileTabBar";
 import Navbar from "../components/Navbar";
-import { getMetadataBaseUrl, SITE_NAME, SITE_URL } from "../lib/seo";
+import { getMetadataBaseUrl, getOgShareImages, SITE_NAME, SITE_URL } from "../lib/seo";
 
 const tajawal = Tajawal({
   subsets: ["arabic"],
@@ -55,16 +55,14 @@ export const metadata: Metadata = {
     title: "أذكار المسلم - AdkarMuslim.com",
     description:
       "أذكار يومية مع عداد، قرآن وتلاوة، تفسير صوتي، أدعية، حديث نبوي، مواقيت صلاة — منصة عربية مجانية.",
-    images: [
-      { url: "/logo.png", width: 800, height: 512, alt: "AdkarMuslim" },
-    ],
+    images: getOgShareImages(),
   },
   twitter: {
     card: "summary_large_image",
     title: "أذكار المسلم - AdkarMuslim.com",
     description:
       "أذكار، قرآن، تفسير صوتي، أدعية، حديث، مواقيت صلاة — AdkarMuslim.com",
-    images: ["/logo.png"],
+    images: getOgShareImages().map((img) => img.url),
   },
   robots: {
     index: true,
@@ -114,7 +112,7 @@ export default function RootLayout({
         <Navbar />
         <MobileHeader />
         {/* مساحة للهيدر المتحرك: موبايل = شعار + بحث (~7rem)؛ ديسكتوب = ناف واحد */}
-        <div className="relative flex min-h-screen w-full min-w-0 flex-col pb-24 pt-[calc(7.25rem+env(safe-area-inset-top,0px))] lg:pt-24">
+        <div className="relative flex min-h-screen w-full min-w-0 flex-col pb-24 pt-[calc(7.75rem+env(safe-area-inset-top,0px))] lg:pt-24">
           <div className="flex-1">{children}</div>
           <Footer />
         </div>

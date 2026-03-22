@@ -2,7 +2,6 @@
 
 import ContentPageFooter from "../../../components/ContentPageFooter";
 import { useEffect, useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import dhikrsData from "../../../../data/adkar-sabah.json";
 import { CheckCircle2, RotateCcw, Share2 } from "lucide-react";
 
@@ -21,6 +20,10 @@ type Dhikr = {
 
 const STORAGE_KEY = "am_adkar_sabah_v1";
 
+type SabahStored = {
+  doneById?: Record<number, number>;
+};
+
 function formatCountTarget(n: number) {
   if (n === 1) return "مرة واحدة";
   return `${n} مرات`;
@@ -35,7 +38,6 @@ export default function AdkarSabahPage() {
   const totalTarget = useMemo(() => dhikrs.reduce((acc, d) => acc + d.count, 0), [dhikrs]);
 
   const [doneById, setDoneById] = useState<Record<number, number>>({});
-  const [vibrateOnTap, setVibrateOnTap] = useState(true);
 
   const [justCompletedId, setJustCompletedId] = useState<number | null>(null);
 
@@ -43,8 +45,8 @@ export default function AdkarSabahPage() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
-      const parsed = JSON.parse(raw) as { doneById?: Record<number, number> };
-      if (parsed?.doneById) setDoneById(parsed.doneById);
+      const parsed = JSON.parse(raw) as SabahStored & { persistProgress?: boolean };
+      if (parsed.doneById) setDoneById(parsed.doneById);
     } catch {
       // ignore
     }
@@ -52,13 +54,12 @@ export default function AdkarSabahPage() {
   }, []);
 
   useEffect(() => {
-    // Persist progress on every change
     try {
       localStorage.setItem(
         STORAGE_KEY,
         JSON.stringify({
           doneById,
-        })
+        } satisfies SabahStored),
       );
     } catch {
       // ignore
@@ -73,14 +74,6 @@ export default function AdkarSabahPage() {
 
   const incrementDhikr = (dhikr: Dhikr) => {
     if (!dhikr) return;
-
-    if (vibrateOnTap && typeof navigator !== "undefined" && "vibrate" in navigator) {
-      try {
-        navigator.vibrate(18);
-      } catch {
-        // ignore
-      }
-    }
 
     setDoneById((prev) => {
       const currentDone = clamp(prev[dhikr.id] ?? 0, 0, dhikr.count);
@@ -174,20 +167,6 @@ export default function AdkarSabahPage() {
           </div>
         </div>
 
-        <div className="mt-5 flex flex-wrap items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setVibrateOnTap((v) => !v)}
-            className={[
-              "focus-ring inline-flex h-9 items-center justify-center rounded-xl border px-3 text-xs transition",
-              vibrateOnTap ? "border-accent/30 bg-accent/10 text-accent" : "border-white/10 bg-white/5 text-white/70",
-            ].join(" ")}
-            aria-label="اهتزاز"
-          >
-            {vibrateOnTap ? "اهتزاز: نعم" : "اهتزاز: لا"}
-          </button>
-        </div>
-
         <div className="mt-6 grid gap-3">
           {dhikrs.map((d, idx) => {
             const done = clamp(doneById[d.id] ?? 0, 0, d.count);
@@ -195,14 +174,8 @@ export default function AdkarSabahPage() {
             const completed = done >= target;
 
             return (
-              <motion.article
+              <article
                 key={d.id}
-                initial={false}
-                animate={{
-                  scale: 1,
-                  opacity: 1,
-                }}
-                transition={{ type: "spring", stiffness: 260, damping: 18 }}
                 className={[
                   "glass-card p-4 sm:p-5",
                   "border-white/10",
@@ -266,19 +239,10 @@ export default function AdkarSabahPage() {
                   </div>
                 </div>
 
-                <AnimatePresence>
-                  {justCompletedId === d.id ? (
-                    <motion.div
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 6 }}
-                      className="mt-3 text-xs text-accent"
-                    >
-                      تمّ الإكمال. ننتقل للذكر التالي...
-                    </motion.div>
-                  ) : null}
-                </AnimatePresence>
-              </motion.article>
+                {justCompletedId === d.id ? (
+                  <div className="mt-3 text-xs text-accent">تمّ الإكمال. ننتقل للذكر التالي...</div>
+                ) : null}
+              </article>
             );
           })}
         </div>

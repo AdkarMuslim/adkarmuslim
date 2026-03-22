@@ -3,13 +3,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ContentPageFooter from "../../../../components/ContentPageFooter";
 import JsonLd from "../../../../components/JsonLd";
+import ShareToolbar from "../../../../components/ShareToolbar";
 import {
   getHadithCollection,
   getHadithCollectionMeta,
   isHadithCollectionId,
 } from "../../../../lib/hadith";
 import { arSeoMeta } from "../../../../lib/ar-seo-meta";
-import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildWebPageJsonLd } from "../../../../lib/seo";
+import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildWebPageJsonLd, SITE_URL } from "../../../../lib/seo";
 
 const HADITH_INDEX_LABEL = "الحديث النبوي";
 
@@ -98,6 +99,8 @@ export default async function HadithDetailPage({
     description,
   });
 
+  const shareUrl = `${SITE_URL}${path}`;
+
   return (
     <>
       <JsonLd data={breadcrumbJsonLd} />
@@ -123,6 +126,8 @@ export default async function HadithDetailPage({
           <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
             <p className="whitespace-pre-line text-lg leading-9 text-white/95">{hadith.text}</p>
           </div>
+
+          <ShareToolbar url={shareUrl} title={headline} />
 
           <ContentPageFooter
             primaryLink={{ href: "/hadith", label: "كتب الحديث النبوي" }}

@@ -2,6 +2,22 @@
 const nextConfig = {
   reactStrictMode: true,
 
+  /** روابط عربية شائعة للحديث → المسار الرسمي (بدون middleware على كل /hadith/*) */
+  async redirects() {
+    return [
+      {
+        source: "/hadith/صحيح-البخاري",
+        destination: "/hadith/bukhari",
+        permanent: true,
+      },
+      {
+        source: "/hadith/صحيح-مسلم",
+        destination: "/hadith/muslim",
+        permanent: true,
+      },
+    ];
+  },
+
   /** رؤوس آمنة لأصول البناء — تساعد الـ CDN ولا تغيّر مسارات الملفات */
   async headers() {
     return [

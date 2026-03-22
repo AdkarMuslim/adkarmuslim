@@ -6,6 +6,31 @@ export const CANONICAL_SITE_ORIGIN = "https://www.adkarmuslim.com";
 export const SITE_URL = CANONICAL_SITE_ORIGIN;
 export const SITE_NAME = "أذكار المسلم";
 
+/**
+ * صورة معاينة المشاركة (Open Graph) — واتساب، فيسبوك، تيليغرام، X.
+ *
+ * **المقاس الموصى به للغلاف:** `1200 × 630` بكسل (نسبة ~1.91:1)، PNG أو JPG، أقل من ~8MB.
+ * **الحد الأدنى المقبول:** حوالي `200 × 200` (المعاينة تكون أصغر).
+ *
+ * 1. صمّم الغلاف بهذا المقاس وضعه في: `public/og-share.png`
+ * 2. غيّر `OG_SHARE_IMAGE_PATH` و `OG_SHARE_IMAGE_SIZE` أدناه ليطابق ملفك.
+ *
+ * إلى حين ذلك نستخدم `logo.png` الموجود.
+ */
+export const OG_SHARE_IMAGE_PATH = "/og-share.png" as const;
+export const OG_SHARE_IMAGE_SIZE = { width: 1200, height: 630 } as const;
+
+export function getOgShareImages(): Array<{ url: string; width: number; height: number; alt: string }> {
+  return [
+    {
+      url: OG_SHARE_IMAGE_PATH,
+      width: OG_SHARE_IMAGE_SIZE.width,
+      height: OG_SHARE_IMAGE_SIZE.height,
+      alt: `${SITE_NAME} — AdkarMuslim.com`,
+    },
+  ];
+}
+
 /** يحوّل https://adkarmuslim.com → https://www.adkarmuslim.com */
 function normalizeAdkarApexToWww(u: URL): URL {
   if (u.hostname.toLowerCase() === "adkarmuslim.com") {

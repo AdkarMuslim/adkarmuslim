@@ -29,7 +29,6 @@ export default function AdkarSalahPage() {
   const totalTarget = useMemo(() => dhikrs.reduce((acc, d) => acc + d.count, 0), [dhikrs]);
 
   const [doneById, setDoneById] = useState<Record<number, number>>({});
-  const [vibrateOnTap, setVibrateOnTap] = useState(true);
   const [justCompletedId, setJustCompletedId] = useState<number | null>(null);
 
   useEffect(() => {
@@ -58,14 +57,6 @@ export default function AdkarSalahPage() {
   const progressPct = totalTarget === 0 ? 0 : Math.round((completedTotal / totalTarget) * 100);
 
   const incrementDhikr = (dhikr: Dhikr) => {
-    if (vibrateOnTap && typeof navigator !== "undefined" && "vibrate" in navigator) {
-      try {
-        navigator.vibrate(18);
-      } catch {
-        // ignore
-      }
-    }
-
     setDoneById((prev) => {
       const currentDone = clamp(prev[dhikr.id] ?? 0, 0, dhikr.count);
       const nextDone = Math.min(dhikr.count, currentDone + 1);
@@ -152,20 +143,6 @@ export default function AdkarSalahPage() {
               style={{ width: `${progressPct}%` }}
             />
           </div>
-        </div>
-
-        <div className="mt-5 flex flex-wrap items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setVibrateOnTap((v) => !v)}
-            className={[
-              "focus-ring inline-flex h-9 items-center justify-center rounded-xl border px-3 text-xs transition",
-              vibrateOnTap ? "border-accent/30 bg-accent/10 text-accent" : "border-white/10 bg-white/5 text-white/70",
-            ].join(" ")}
-            aria-label="اهتزاز"
-          >
-            {vibrateOnTap ? "اهتزاز: نعم" : "اهتزاز: لا"}
-          </button>
         </div>
 
         <div className="mt-6 grid gap-3">
