@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Tajawal } from "next/font/google";
+import Script from "next/script";
 
 import "./globals.css";
 import Footer from "../components/Footer";
@@ -8,6 +9,9 @@ import MobileHeader from "../components/MobileHeader";
 import MobileTabBar from "../components/MobileTabBar";
 import Navbar from "../components/Navbar";
 import { getMetadataBaseUrl, getOgShareImages, SITE_NAME, SITE_URL } from "../lib/seo";
+
+/** Google Analytics 4 — عرّف `NEXT_PUBLIC_GA_ID` في Vercel أو استخدم القيمة الافتراضية */
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID ?? "G-HKEVSJXW74";
 
 const tajawal = Tajawal({
   subsets: ["arabic"],
@@ -109,9 +113,27 @@ export default function RootLayout({
     ],
   };
 
+  const loadGa = process.env.NODE_ENV === "production" && Boolean(GA_MEASUREMENT_ID);
+
   return (
     <html lang="ar" dir="rtl" className="dark" suppressHydrationWarning>
       <body className={`${tajawal.className} antialiased min-h-screen w-full min-w-0`}>
+        {loadGa ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_MEASUREMENT_ID}');
+              `}
+            </Script>
+          </>
+        ) : null}
         <JsonLd data={globalJsonLd} />
         <Navbar />
         <MobileHeader />
