@@ -1,7 +1,7 @@
 "use client";
 
 import ContentPageFooter from "../../../components/ContentPageFooter";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import dhikrsData from "../../../../data/adkar-sabah.json";
 import { CheckCircle2, RotateCcw, Share2 } from "lucide-react";
 
@@ -18,11 +18,6 @@ type Dhikr = {
   category?: string;
 };
 
-const STORAGE_KEY = "am_adkar_sabah_v1";
-
-type SabahStored = {
-  doneById?: Record<number, number>;
-};
 
 function formatCountTarget(n: number) {
   if (n === 1) return "مرة واحدة";
@@ -41,30 +36,7 @@ export default function AdkarSabahPage() {
 
   const [justCompletedId, setJustCompletedId] = useState<number | null>(null);
 
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const parsed = JSON.parse(raw) as SabahStored & { persistProgress?: boolean };
-      if (parsed.doneById) setDoneById(parsed.doneById);
-    } catch {
-      // ignore
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
-  useEffect(() => {
-    try {
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify({
-          doneById,
-        } satisfies SabahStored),
-      );
-    } catch {
-      // ignore
-    }
-  }, [doneById]);
 
   const completedTotal = useMemo(() => {
     return dhikrs.reduce((acc, d) => acc + clamp(doneById[d.id] ?? 0, 0, d.count), 0);
@@ -94,11 +66,6 @@ export default function AdkarSabahPage() {
   const resetProgress = () => {
     setDoneById({});
     setJustCompletedId(null);
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } catch {
-      // ignore
-    }
   };
 
   const onShare = async () => {

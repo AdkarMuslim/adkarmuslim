@@ -15,7 +15,7 @@ const amiri = Amiri({ subsets: ["arabic"], weight: ["400", "700"] });
 
 function surahMetaDescription(surahName: string, surahNumber: number): string {
   return surahName
-    ? `اقرأ سورة ${surahName} كاملة بخط واضح، غيّر القارئ، واستمع للتلاوة. رابط مباشر لتفسير هذه السورة صوتياً على أذكار المسلم.`
+    ? `اقرأ ${surahName} كاملة بخط واضح، غيّر القارئ، واستمع للتلاوة. رابط مباشر لتفسير هذه السورة صوتياً على أذكار المسلم.`
     : `السورة ${surahNumber} من القرآن الكريم — قراءة آيات، تلاوة، وتفسير صوتي.`;
 }
 
@@ -36,7 +36,8 @@ export async function generateMetadata({
   }
   const chapter = await getQuranApiChapter(surahNumber);
   const surahName = chapter?.surahNameArabicLong ?? "";
-  const title = surahName ? `سورة ${surahName}` : `سورة ${surahNumber}`;
+  /** `surahNameArabicLong` من الـ API يتضمّن أصلاً «سورة …» — لا تضف «سورة» مرة ثانية */
+  const title = surahName || `سورة ${surahNumber}`;
   const description = surahMetaDescription(surahName, surahNumber);
 
   return arSeoMeta({

@@ -1,7 +1,7 @@
 "use client";
 
 import ContentPageFooter from "../../../components/ContentPageFooter";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, RotateCcw, Share2 } from "lucide-react";
 import dhikrsData from "../../../../data/adkar-salah.json";
@@ -13,7 +13,6 @@ type Dhikr = {
   virtue?: string;
 };
 
-const STORAGE_KEY = "am_adkar_salah_v1";
 
 function formatCountTarget(n: number) {
   if (n === 1) return "مرة واحدة";
@@ -31,24 +30,7 @@ export default function AdkarSalahPage() {
   const [doneById, setDoneById] = useState<Record<number, number>>({});
   const [justCompletedId, setJustCompletedId] = useState<number | null>(null);
 
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const parsed = JSON.parse(raw) as { doneById?: Record<number, number> };
-      if (parsed?.doneById) setDoneById(parsed.doneById);
-    } catch {
-      // ignore
-    }
-  }, []);
 
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ doneById }));
-    } catch {
-      // ignore
-    }
-  }, [doneById]);
 
   const completedTotal = useMemo(() => {
     return dhikrs.reduce((acc, d) => acc + clamp(doneById[d.id] ?? 0, 0, d.count), 0);
@@ -76,11 +58,6 @@ export default function AdkarSalahPage() {
   const resetProgress = () => {
     setDoneById({});
     setJustCompletedId(null);
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } catch {
-      // ignore
-    }
   };
 
   const onShare = async () => {
@@ -193,7 +170,9 @@ export default function AdkarSalahPage() {
                       onClick={() => incrementDhikr(d)}
                       className={[
                         "w-full rounded-2xl px-4 py-3 text-base font-bold transition",
-                        completed ? "bg-white/10 text-white/85 border border-accent/25" : "bg-gradient-to-r from-primary/80 to-accent/80 text-black shadow-soft",
+                        completed
+                          ? "bg-white/10 text-white/85 border border-accent/25"
+                          : "bg-gradient-to-r from-primary/80 to-accent/80 text-black shadow-soft",
                       ].join(" ")}
                       aria-label="زيادة العدّ لهذا الذكر"
                     >

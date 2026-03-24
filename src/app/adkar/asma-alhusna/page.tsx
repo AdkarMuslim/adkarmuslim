@@ -13,7 +13,6 @@ type NameItem = {
   words: Array<{ word: string; meaning: string }>;
 };
 
-const STORAGE_KEY = "am_asma_alhusna_v1";
 
 export default function AsmaAlhusnaPage() {
   const items = useMemo(() => names as NameItem[], []);
@@ -24,24 +23,7 @@ export default function AsmaAlhusnaPage() {
   const [showHadithBlock, setShowHadithBlock] = useState(false);
   const [mobileSheetOpen, setMobileSheetOpen] = useState(false);
 
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const parsed = JSON.parse(raw) as { selectedId?: number };
-      if (parsed?.selectedId) setSelectedId(parsed.selectedId);
-    } catch {
-      // ignore
-    }
-  }, []);
 
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ selectedId }));
-    } catch {
-      // ignore
-    }
-  }, [selectedId]);
 
   const selected = useMemo(() => items.find((n) => n.id === selectedId) ?? items[0], [items, selectedId]);
 

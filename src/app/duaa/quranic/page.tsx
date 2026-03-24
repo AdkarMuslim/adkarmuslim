@@ -1,7 +1,7 @@
 "use client";
 
 import ContentPageFooter from "../../../components/ContentPageFooter";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { RotateCcw, Share2 } from "lucide-react";
 import items from "../../../../data/quranic-duaa.json";
@@ -13,7 +13,6 @@ type Item = {
   virtue?: string;
 };
 
-const STORAGE_KEY = "am_quranic_duaa_v1";
 
 function clamp(n: number, min: number, max: number) {
   return Math.max(min, Math.min(max, n));
@@ -26,24 +25,7 @@ export default function QuranicDuaaPage() {
   const [doneById, setDoneById] = useState<Record<number, number>>({});
   const [justCompletedId, setJustCompletedId] = useState<number | null>(null);
 
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const parsed = JSON.parse(raw) as { doneById?: Record<number, number> };
-      if (parsed.doneById) setDoneById(parsed.doneById);
-    } catch {
-      // ignore
-    }
-  }, []);
 
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ doneById }));
-    } catch {
-      // ignore
-    }
-  }, [doneById]);
 
   const completedTotal = useMemo(
     () => duaas.reduce((a, d) => a + clamp(doneById[d.id] ?? 0, 0, d.count), 0),
@@ -69,11 +51,6 @@ export default function QuranicDuaaPage() {
   const reset = () => {
     setDoneById({});
     setJustCompletedId(null);
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } catch {
-      // ignore
-    }
   };
 
   const onShare = async () => {
